@@ -6,7 +6,7 @@ export function Footer() {
           <p className="font-semibold tracking-[0.12em]">GAIA</p>
           <p className="mt-1 text-xs text-gaia-200">Assistente virtual para uma jornada mais sustentável.</p>
         </div>
-        <p className="text-xs text-white/60">© 2026 Challenge SoulUp · FIAP</p>
+        <p className="text-xs text-white/60">© 2026 Challenge ADS · FIAP</p>
       </div>
     </footer>
   )

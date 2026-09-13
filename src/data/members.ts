@@ -18,12 +18,12 @@ export const members: Member[] = [
     linkedin: 'https://www.linkedin.com/in/erick-keiji-miyashiro-6228b93b4',
   },
   {
-    name: 'João Carlos Silva',
-    rm: '568952',
+    name: 'Yuto Inoue',
+    rm: '573161',
     className: '1TDSPv-2026',
-    image: '/images/joao.jpg',
-    github: 'https://github.com/jocax007',
-    linkedin: 'https://www.linkedin.com/in/joão-carlos-lopes-957976264',
+    image: '/images/yuto.jpeg',
+    github: 'https://github.com/yutoinouee',
+    linkedin: 'https://www.linkedin.com/in/yuto-inoue-713348373?utm_source=share_via&utm_content=profile&utm_medium=member_ios',
   },
   {
     name: 'Gustavo Costa',
