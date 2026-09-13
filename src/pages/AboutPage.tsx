@@ -30,9 +30,8 @@ export function AboutPage() {
           {topics.map((topic, index) => (
             <article
               key={topic.title}
-              className={`animate-rise rounded-[1.75rem] p-8 ring-1 ring-gaia-900/5 ${
-                index === 0 ? 'bg-gaia-100 lg:col-span-2' : 'bg-white'
-              }`}
+              className={`animate-rise rounded-[1.75rem] p-8 ring-1 ring-gaia-900/5 ${index === 0 ? 'bg-gaia-100 lg:col-span-2' : 'bg-white'
+                }`}
             >
               <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gaia-600">0{index + 1}</span>
               <h2 className="mt-3 text-2xl font-semibold text-gaia-950">{topic.title}</h2>
@@ -43,7 +42,7 @@ export function AboutPage() {
 
         <section className="mt-6 rounded-[1.75rem] bg-white p-8 ring-1 ring-gaia-900/5">
           <h2 className="text-2xl font-semibold text-gaia-950">Tecnologias utilizadas</h2>
-          <p className="mt-2 text-sm text-slate-500">Ferramentas trabalhadas durante as aulas da Sprint 4.</p>
+          <p className="mt-2 text-sm text-slate-500">Ferramentas trabalhadas durante esse projeto</p>
           <div className="mt-6 flex flex-wrap gap-3">
             {technologies.map((technology) => (
               <div
@@ -66,7 +65,6 @@ export function AboutPage() {
             <li className="rounded-xl bg-white/5 px-4 py-3 ring-1 ring-white/10">Criação da estrutura inicial e identidade visual.</li>
             <li className="rounded-xl bg-white/5 px-4 py-3 ring-1 ring-white/10">Desenvolvimento das páginas obrigatórias.</li>
             <li className="rounded-xl bg-white/5 px-4 py-3 ring-1 ring-white/10">Migração para React, TypeScript e Tailwind CSS.</li>
-            <li className="rounded-xl bg-white/5 px-4 py-3 ring-1 ring-white/10">Componentização e criação da navegação SPA.</li>
             <li className="rounded-xl bg-white/5 px-4 py-3 ring-1 ring-white/10">Integração com a API Java da solução.</li>
           </ol>
         </section>
