@@ -3,7 +3,7 @@ import type { Accessory } from '../types/accessory'
 export const accessories: Accessory[] = [
   {
     id: 1,
-    name: 'Boné verde',
+    name: 'Boné Azul',
     description: 'Acessório simples para personalizar o avatar.',
     price: 80,
     icon: '🧢',
