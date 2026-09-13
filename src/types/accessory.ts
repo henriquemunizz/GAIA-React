@@ -1,7 +1,11 @@
 export interface Accessory {
-  id: number
-  name: string
-  description: string
-  price: number
-  icon: string
+  idRecompensa: number
+  nmRecompensa: string
+  dsRecompensa: string
+  tpAcessorio: string
+  nrCustoPontos: number
+  dsImagem: string | null
+  stRecompensa: string
 }
+
+export type NewAccessory = Omit<Accessory, 'idRecompensa'>
