@@ -11,7 +11,7 @@ const questions = [
   },
   {
     question: 'Como o usuário ganha pontos extras?',
-    answer: 'Quando conclui uma missão existente na SoulUp, a GAIA pode conceder pontos extras como incentivo.',
+    answer: 'Quando conclui uma missão ou interação existente na SoulUp, a GAIA pode conceder pontos extras como incentivo, usar sugestões de legenda criado por GAIA por exemplo, também dará pontos extras ao usuário.',
   },
   {
     question: 'Para que servem os pontos extras?',

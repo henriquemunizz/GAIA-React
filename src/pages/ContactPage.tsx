@@ -44,16 +44,16 @@ export function ContactPage() {
             <p>
               <strong className="mb-1 block text-xs uppercase tracking-wider text-gaia-400">GitHub</strong>
               <a
-                href="https://github.com/Durannd/gaia-sprint-4"
+                href="https://github.com/"
                 target="_blank"
                 rel="noreferrer"
                 className="transition-colors hover:text-white"
               >
-                github.com/Durannd/gaia-sprint-4
+                github.com
               </a>
             </p>
             <p><strong className="mb-1 block text-xs uppercase tracking-wider text-gaia-400">Instituição</strong> FIAP</p>
-            <p><strong className="mb-1 block text-xs uppercase tracking-wider text-gaia-400">Projeto</strong> Challenge SoulUp 2026</p>
+            <p><strong className="mb-1 block text-xs uppercase tracking-wider text-gaia-400">Projeto</strong> Challenge ADS 2026</p>
           </div>
         </section>
 
