@@ -21,11 +21,11 @@ export function HomePage() {
               Sua jornada sustentável
             </span>
             <h1 className="mt-6 max-w-3xl text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
-              Pequenas ações.
-              <span className="block text-gaia-400">Grandes mudanças.</span>
+              Pequenas ações
+              <span className="block text-gaia-400">Grandes mudanças</span>
             </h1>
             <p className="mt-6 max-w-xl text-base leading-7 text-gaia-100 sm:text-lg">
-              A GAIA acompanha sua experiência na SoulUp, celebra cada missão concluída e transforma
+              A GAIA acompanha sua experiência na SoulUp, celebra cada interação, missão concluída e transforma
               seu progresso em uma jornada mais pessoal.
             </p>
 
@@ -34,7 +34,7 @@ export function HomePage() {
                 to="/assistente"
                 className="group flex items-center gap-3 rounded-full bg-gaia-400 py-2 pl-6 pr-2 text-sm font-bold text-gaia-950 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-gaia-200 active:scale-[0.98]"
               >
-                Começar jornada
+                Testar Funcionalidades
                 <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gaia-950 text-white transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-0.5">→</span>
               </Link>
               <Link
@@ -78,8 +78,12 @@ export function HomePage() {
 
       <section className="mx-auto max-w-6xl px-4 py-20 sm:py-28">
         <div className="animate-rise delay-1 max-w-2xl">
-          <span className="text-xs font-bold uppercase tracking-[0.2em] text-gaia-600">Explore a solução</span>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-gaia-950 sm:text-4xl">Tudo o que você precisa para avançar com propósito.</h2>
+          <span className="text-xs font-bold uppercase tracking-[0.2em] text-gaia-600">
+            Explore a solução
+          </span>
+          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-gaia-950 sm:text-4xl">
+            Tudo o que você precisa para avançar com propósito.
+          </h2>
         </div>
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-12">
@@ -87,13 +91,12 @@ export function HomePage() {
             <Link
               key={feature.to}
               to={feature.to}
-              className={`group rounded-[1.75rem] p-7 ring-1 ring-gaia-900/5 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-[0_24px_60px_rgba(6,71,72,0.1)] ${
-                index === 0
-                  ? 'bg-gaia-950 text-white lg:col-span-7'
-                  : index === 1
-                    ? 'bg-gaia-100 text-gaia-950 lg:col-span-5'
-                    : 'bg-white text-gaia-950 lg:col-span-6'
-              }`}
+              className={`group rounded-[1.75rem] p-7 ring-1 ring-gaia-900/5 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-[0_24px_60px_rgba(6,71,72,0.1)] ${index === 0
+                ? 'bg-gaia-950 text-white lg:col-span-7'
+                : index === 1
+                  ? 'bg-gaia-100 text-gaia-950 lg:col-span-5'
+                  : 'bg-white text-gaia-950 lg:col-span-6'
+                }`}
             >
               <div className="flex items-start justify-between gap-6">
                 <span className={`text-xs font-bold ${index === 0 ? 'text-gaia-400' : 'text-gaia-600'}`}>{feature.number}</span>

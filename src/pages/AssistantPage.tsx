@@ -11,7 +11,7 @@ const benefits = [
   },
   {
     title: 'Pontos extras',
-    description: 'Ao concluir uma missão da SoulUp, o usuário pode ganhar pontos extras.',
+    description: 'Ao concluir uma missão ou realizar interações na SoulUp, o usuário pode ganhar pontos extras.',
     label: 'Bônus',
   },
   {
@@ -52,11 +52,10 @@ export function AssistantPage() {
           {benefits.map((benefit, index) => (
             <article
               key={benefit.title}
-              className={`rounded-[1.75rem] p-7 ring-1 ring-gaia-900/5 ${
-                index === 0
+              className={`rounded-[1.75rem] p-7 ring-1 ring-gaia-900/5 ${index === 0
                   ? 'bg-gaia-950 text-white md:col-span-6'
                   : 'bg-white text-gaia-950 md:col-span-3'
-              }`}
+                }`}
             >
               <span className={`text-[10px] font-bold uppercase tracking-[0.2em] ${index === 0 ? 'text-gaia-400' : 'text-gaia-600'}`}>{benefit.label}</span>
               <h2 className="mt-8 text-xl font-semibold">{benefit.title}</h2>
