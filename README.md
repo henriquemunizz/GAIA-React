@@ -163,9 +163,9 @@ A integração será realizada com a API Java desenvolvida na disciplina de **Do
 ## Links da entrega
 
 - **Repositório GitHub:** [GAIA-React](https://github.com/henriquemunizz/GAIA-React)
-- **Aplicação publicada na Vercel:** [Acessar aplicação](COLE_AQUI_O_LINK_DA_VERCEL)
+- **Aplicação publicada na Vercel:** [Acessar aplicação](https://gaia-react.vercel.app/)
 - **API Java publicada:**  [Acessar API] https://gaia-api-sprint-4.vercel.app/
-- **Vídeo de apresentação no YouTube:** [Assistir ao vídeo](COLE_AQUI_O_LINK_DO_YOUTUBE)
+- **Vídeo de apresentação no YouTube:** [Assistir ao vídeo](https://youtu.be/hf6ZWBWJSaQ)
 
 ## Contato
 
