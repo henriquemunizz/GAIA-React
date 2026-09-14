@@ -1,5 +1,9 @@
 # GAIA — Assistente Virtual para a SoulUp
 
+- **Aplicação publicada na Vercel:** [Acessar aplicação](https://gaia-react.vercel.app/)
+- - **Vídeo de apresentação no YouTube:** [Assistir ao vídeo](https://youtu.be/hf6ZWBWJSaQ)
+
+
 ![Banner do projeto GAIA](public/images/gaia-banner.jpeg)
 
 ## Descrição do projeto
@@ -165,6 +169,7 @@ A integração será realizada com a API Java desenvolvida na disciplina de **Do
 - **Repositório GitHub:** [GAIA-React](https://github.com/henriquemunizz/GAIA-React)
 - **Aplicação publicada na Vercel:** [Acessar aplicação](https://gaia-react.vercel.app/)
 - **API Java publicada:**  [Acessar API] https://gaia-api-sprint-4.vercel.app/
+- com end points /missoes e /recompensas
 - **Vídeo de apresentação no YouTube:** [Assistir ao vídeo](https://youtu.be/hf6ZWBWJSaQ)
 
 ## Contato
