@@ -1,6 +1,4 @@
-import type { Mission } from '../types/mission'
-
-export const missions: Mission[] = [
+export const missions = [
   {
     id: 1,
     name: 'Missão simples concluída',

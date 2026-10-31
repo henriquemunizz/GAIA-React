@@ -30,18 +30,18 @@ export function AboutPage() {
           {topics.map((topic, index) => (
             <article
               key={topic.title}
-              className={`animate-rise rounded-[1.75rem] p-8 ring-1 ring-gaia-900/5 ${index === 0 ? 'bg-gaia-100 lg:col-span-2' : 'bg-white'
+              className={`animate-rise rounded-[1.25rem] p-8 ring-1 ring-gaia-900/5 ${index === 0 ? 'bg-gaia-100 lg:col-span-2' : 'bg-white'
                 }`}
             >
               <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gaia-600">0{index + 1}</span>
-              <h2 className="mt-3 text-2xl font-semibold text-gaia-950">{topic.title}</h2>
+              <h2 className="mt-3 text-2xl font-semibold text-slate-900">{topic.title}</h2>
               <p className="mt-4 max-w-3xl leading-7 text-slate-600">{topic.text}</p>
             </article>
           ))}
         </section>
 
-        <section className="mt-6 rounded-[1.75rem] bg-white p-8 ring-1 ring-gaia-900/5">
-          <h2 className="text-2xl font-semibold text-gaia-950">Tecnologias utilizadas</h2>
+        <section className="mt-6 rounded-[1.25rem] bg-white p-8 ring-1 ring-gaia-900/5">
+          <h2 className="text-2xl font-semibold text-slate-900">Tecnologias utilizadas</h2>
           <p className="mt-2 text-sm text-slate-500">Ferramentas trabalhadas durante esse projeto</p>
           <div className="mt-6 flex flex-wrap gap-3">
             {technologies.map((technology) => (
@@ -55,7 +55,7 @@ export function AboutPage() {
           </div>
         </section>
 
-        <section className="mt-6 grid gap-8 rounded-[1.75rem] bg-gaia-950 p-8 text-white md:grid-cols-[0.7fr_1.3fr] md:p-10">
+        <section className="mt-6 grid gap-8 rounded-[1.25rem] bg-gaia-600 p-8 text-white md:grid-cols-[0.7fr_1.3fr] md:p-10">
           <div>
             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gaia-400">Evolução</span>
             <h2 className="mt-3 text-3xl font-semibold">Roadmap</h2>

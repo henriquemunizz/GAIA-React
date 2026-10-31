@@ -1,6 +1,4 @@
-import type { Accessory } from '../types/accessory'
-
-export const accessories: Accessory[] = [
+export const accessories = [
   {
     id: 1,
     name: 'Boné Azul',

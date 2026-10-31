@@ -92,9 +92,9 @@ export function AssistantPage() {
           {benefits.map((benefit, index) => (
             <article
               key={benefit.title}
-              className={`rounded-[1.75rem] p-7 ring-1 ring-gaia-900/5 ${index === 0
-                  ? 'bg-gaia-950 text-white md:col-span-6'
-                  : 'bg-white text-gaia-950 md:col-span-3'
+              className={`rounded-[1.25rem] p-7 ring-1 ring-gaia-900/5 ${index === 0
+                  ? 'bg-gaia-600 text-white md:col-span-6'
+                  : 'bg-white text-slate-900 md:col-span-3'
                 }`}
             >
               <span className={`text-[10px] font-bold uppercase tracking-[0.2em] ${index === 0 ? 'text-gaia-400' : 'text-gaia-600'}`}>{benefit.label}</span>
@@ -104,10 +104,10 @@ export function AssistantPage() {
           ))}
         </section>
 
-        <section className="mt-6 grid gap-8 rounded-[1.75rem] bg-gaia-100 p-7 ring-1 ring-gaia-900/5 md:grid-cols-[0.8fr_1.2fr] md:p-10">
+        <section className="mt-6 grid gap-8 rounded-[1.25rem] bg-gaia-100 p-7 ring-1 ring-gaia-900/5 md:grid-cols-[0.8fr_1.2fr] md:p-10">
           <div className="text-center md:text-left">
             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gaia-600">Dados da API</span>
-            <h2 className="mt-3 text-3xl font-semibold text-gaia-950">Registrar conclusão de missão</h2>
+            <h2 className="mt-3 text-3xl font-semibold text-slate-900">Registrar conclusão de missão</h2>
             <p className="mt-3 text-sm leading-6 text-slate-600">Escolha uma missão carregada do backend e receba os pontos correspondentes.</p>
           </div>
 
@@ -130,15 +130,15 @@ export function AssistantPage() {
             {error && <p className="mt-3 text-sm text-red-700" role="alert">{error}</p>}
             {!loading && !error && activeMissions.length === 0 && <p className="mt-3 text-sm text-slate-500">Nenhuma missão ativa foi cadastrada.</p>}
 
-            <button type="submit" disabled={loading || Boolean(error)} className="mt-4 w-full rounded-full bg-gaia-950 px-4 py-3 font-semibold text-white transition-colors hover:bg-gaia-700 disabled:cursor-not-allowed disabled:opacity-50">
+            <button type="submit" disabled={loading || Boolean(error)} className="mt-4 w-full rounded-full bg-gaia-600 px-4 py-3 font-semibold text-white transition-colors hover:bg-gaia-700 disabled:cursor-not-allowed disabled:opacity-50">
               Receber pontos extras
             </button>
             {message && <p className="mt-4 rounded-xl bg-gaia-100 p-4 text-center text-sm font-medium text-gaia-700" role="status">{message}</p>}
           </form>
         </section>
 
-        <details className="group mt-6 rounded-[1.75rem] bg-white p-7 ring-1 ring-gaia-900/5">
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-gaia-950">
+        <details className="group mt-6 rounded-[1.25rem] bg-white p-7 ring-1 ring-gaia-900/5">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-slate-900">
             Cadastrar nova missão na API
             <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gaia-100 text-gaia-700 transition-transform group-open:rotate-45">+</span>
           </summary>
@@ -171,7 +171,7 @@ export function AssistantPage() {
               <label htmlFor="mission-image" className="text-sm font-semibold text-slate-700">URL da imagem (opcional)</label>
               <input id="mission-image" type="url" className={inputClass} {...register('dsImagem')} />
             </div>
-            <button type="submit" disabled={isSubmitting} className="rounded-full bg-gaia-950 px-5 py-3 font-semibold text-white hover:bg-gaia-700 disabled:opacity-50 md:col-span-2">
+            <button type="submit" disabled={isSubmitting} className="rounded-full bg-gaia-600 px-5 py-3 font-semibold text-white hover:bg-gaia-700 disabled:opacity-50 md:col-span-2">
               {isSubmitting ? 'Cadastrando...' : 'Cadastrar missão'}
             </button>
             {createMessage && <p className="text-center text-sm text-gaia-700 md:col-span-2" role="status">{createMessage}</p>}

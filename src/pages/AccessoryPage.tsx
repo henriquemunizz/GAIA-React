@@ -37,9 +37,9 @@ export function AccessoryPage() {
     return (
       <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col items-center px-4 py-24 text-center">
         <span className="text-6xl">?</span>
-        <h1 className="mt-5 text-3xl font-semibold text-gaia-950">Acessório não encontrado</h1>
+        <h1 className="mt-5 text-3xl font-semibold text-slate-900">Acessório não encontrado</h1>
         <p className="mt-3 text-sm text-slate-600">{error}</p>
-        <button className="mt-6 rounded-full bg-gaia-950 px-5 py-3 text-sm font-semibold text-white hover:bg-gaia-700" onClick={() => navigate('/loja')}>
+        <button className="mt-6 rounded-full bg-gaia-600 px-5 py-3 text-sm font-semibold text-white hover:bg-gaia-700" onClick={() => navigate('/loja')}>
           Voltar para a loja
         </button>
       </main>
@@ -65,13 +65,13 @@ export function AccessoryPage() {
 
         <div className="flex flex-col justify-center p-6 sm:p-10">
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gaia-600">{accessory.tpAcessorio}</p>
-          <h1 className="mt-3 text-4xl font-semibold tracking-tight text-gaia-950">{accessory.nmRecompensa}</h1>
+          <h1 className="mt-3 text-4xl font-semibold tracking-tight text-slate-900">{accessory.nmRecompensa}</h1>
           <p className="mt-4 leading-7 text-slate-600">{accessory.dsRecompensa}</p>
           <p className="mt-6 text-xl font-semibold text-gaia-600">{accessory.nrCustoPontos} pontos</p>
           <p className="mt-1 text-sm text-slate-500">Seu saldo: {points} pontos</p>
 
           <button
-            className="mt-6 rounded-full bg-gaia-950 px-4 py-3.5 font-semibold text-white transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-gaia-700 active:scale-[0.99]"
+            className="mt-6 rounded-full bg-gaia-600 px-4 py-3.5 font-semibold text-white transition-all duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-gaia-700 active:scale-[0.99]"
             onClick={() => handlePurchase(accessory)}
           >
             Comprar acessório

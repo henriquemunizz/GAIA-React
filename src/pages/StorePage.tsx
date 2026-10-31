@@ -55,12 +55,12 @@ export function StorePage() {
       />
 
       <div className="mx-auto max-w-6xl px-4 py-16 sm:py-24">
-        <div className="mb-8 flex flex-col justify-between gap-4 rounded-[1.75rem] bg-gaia-100 p-6 ring-1 ring-gaia-900/5 sm:flex-row sm:items-center">
+        <div className="mb-8 flex flex-col justify-between gap-4 rounded-[1.25rem] bg-gaia-100 p-6 ring-1 ring-gaia-900/5 sm:flex-row sm:items-center">
           <div>
             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gaia-600">Dados da API</span>
-            <h2 className="mt-2 text-2xl font-semibold text-gaia-950">Escolha seu próximo acessório.</h2>
+            <h2 className="mt-2 text-2xl font-semibold text-slate-900">Escolha seu próximo acessório.</h2>
           </div>
-          <p className="rounded-full bg-gaia-950 px-5 py-3 text-center text-sm font-bold text-white">
+          <p className="rounded-full bg-gaia-600 px-5 py-3 text-center text-sm font-bold text-white">
             Saldo · <span className="text-gaia-400">{points} pontos</span>
           </p>
         </div>
@@ -77,8 +77,8 @@ export function StorePage() {
           </section>
         )}
 
-        <details className="group mt-8 rounded-[1.75rem] bg-white p-7 ring-1 ring-gaia-900/5">
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-gaia-950">
+        <details className="group mt-8 rounded-[1.25rem] bg-white p-7 ring-1 ring-gaia-900/5">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-slate-900">
             Cadastrar nova recompensa na API
             <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gaia-100 text-gaia-700 transition-transform group-open:rotate-45">+</span>
           </summary>
@@ -108,7 +108,7 @@ export function StorePage() {
               <label htmlFor="accessory-image" className="text-sm font-semibold text-slate-700">URL da imagem (opcional)</label>
               <input id="accessory-image" type="url" className={inputClass} {...register('dsImagem')} />
             </div>
-            <button type="submit" disabled={isSubmitting} className="rounded-full bg-gaia-950 px-5 py-3 font-semibold text-white hover:bg-gaia-700 disabled:opacity-50 md:col-span-2">
+            <button type="submit" disabled={isSubmitting} className="rounded-full bg-gaia-600 px-5 py-3 font-semibold text-white hover:bg-gaia-700 disabled:opacity-50 md:col-span-2">
               {isSubmitting ? 'Cadastrando...' : 'Cadastrar recompensa'}
             </button>
             {createMessage && <p className="text-center text-sm text-gaia-700 md:col-span-2" role="status">{createMessage}</p>}
