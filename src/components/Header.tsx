@@ -22,9 +22,9 @@ export function Header() {
       >
         <NavLink to="/" className="group flex items-center gap-3">
           <img
-            src="/images/gaia-logo.png"
-            alt="Logo GAIA"
-            className="h-10 w-10 rounded-full object-cover hue-rotate-[65deg] transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:rotate-6 group-hover:scale-105"
+            src="/images/gaia-robot.png"
+            alt="Robô Gaia com olhos sorridentes"
+            className="h-10 w-10 object-contain transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:rotate-6 group-hover:scale-105"
           />
           <span>
             <strong className="block font-heading text-xl font-extrabold tracking-tight text-gaia-600">GAIA</strong>

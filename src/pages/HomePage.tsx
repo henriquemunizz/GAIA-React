@@ -55,9 +55,9 @@ export function HomePage() {
               <div className="mt-10 flex justify-center">
                 <div className="flex h-40 w-40 items-center justify-center rounded-full bg-gaia-400/10 ring-1 ring-gaia-200/30">
                   <img
-                    src="/images/gaia-logo.png"
-                    alt="Logo circular da GAIA"
-                    className="h-28 w-28 rounded-full object-cover hue-rotate-[65deg] shadow-[0_0_60px_rgba(89,76,240,0.3)]"
+                    src="/images/gaia-robot.png"
+                    alt="Robô Gaia com olhos sorridentes"
+                    className="h-28 w-28 object-contain drop-shadow-[0_0_30px_rgba(89,76,240,0.3)]"
                   />
                 </div>
               </div>
