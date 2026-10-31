@@ -1,7 +1,24 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/inter-latin-variable.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 200 900;
+  font-display: swap;
+  src: url('/fonts/nunito-latin-variable.woff2') format('woff2');
+}
+
 @theme {
-  --font-sans: "Segoe UI", Arial, sans-serif;
+  --font-sans: "Inter", "Segoe UI", Arial, sans-serif;
+  --font-heading: "Nunito", "Segoe UI", Arial, sans-serif;
   --color-gaia-50: #f1efff;
   --color-gaia-100: #eae7ff;
   --color-gaia-200: #d6d0ff;
@@ -15,6 +32,12 @@
   --color-sky-brand: #3db9e8;
   --color-sun-300: #ffe39a;
   --color-sun-400: #f2c94c;
+}
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
 }
 
 body {
@@ -35,7 +58,7 @@ button,
 input,
 select,
 textarea {
-  font: inherit;
+  font-family: inherit;
 }
 
 :focus-visible {

@@ -27,7 +27,7 @@ export function Header() {
             className="h-10 w-10 rounded-full object-cover hue-rotate-[65deg] transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:rotate-6 group-hover:scale-105"
           />
           <span>
-            <strong className="block text-xl font-extrabold tracking-tight text-gaia-600">GAIA</strong>
+            <strong className="block font-heading text-xl font-extrabold tracking-tight text-gaia-600">GAIA</strong>
           </span>
         </NavLink>
 
