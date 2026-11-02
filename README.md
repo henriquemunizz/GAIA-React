@@ -162,6 +162,8 @@ A integração segue os controllers e DTOs em `gaia-api/src/main/java/br/com/fia
 
 Cadastro não autentica: após criar a conta, a tela solicita login. Na edição da própria conta, senha vazia é omitida para manter a atual. O perfil não pode ser escolhido pelo cliente.
 
+Na tela de cadastro, **Entrar como administrador** abre o login com a explicação das funções administrativas. O atalho usa a mesma autenticação por sessão; só contas com perfil `ADMIN` retornado pela API recebem os controles de cadastro, alteração, exclusão e desativação de missões e recompensas.
+
 Missões podem ser concluídas repetidamente. Cada ação faz um POST, bloqueia duplo clique e usa o progresso retornado pelo servidor. Não há reenvio automático de mutações. Em falha de conexão, atualize progresso e histórico antes de decidir repetir uma ação.
 
 Administradores veem todos os itens, inclusive inativos. Usuários comuns veem apenas ativos. DELETE é definitivo; o conflito `409` por histórico oferece desativação com `ativo=0`. PUT dos catálogos retorna `200` vazio, e exclusão/logout retornam `204`.

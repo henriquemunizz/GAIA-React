@@ -83,3 +83,13 @@ test('não apresenta sucesso quando o servidor devolve HTML no lugar de JSON', a
   globalThis.fetch = async () => new Response('<html>Erro de proxy</html>')
   await assert.rejects(request('/usuarios/me/progresso'), /resposta do servidor/)
 })
+
+test('trata falha ao receber o corpo sem repetir a conclusão', async () => {
+  let attempts = 0
+  globalThis.fetch = async () => {
+    attempts += 1
+    return { text: async () => { throw new TypeError('Connection interrupted') } }
+  }
+  await assert.rejects(request('/usuarios/me/missoes/1/concluir', { method: 'POST' }), (error) => error instanceof ApiError && error.status === 0 && error.message.includes('atualize os dados'))
+  assert.equal(attempts, 1)
+})

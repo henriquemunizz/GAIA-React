@@ -16,6 +16,7 @@ export function errorMessage(error: unknown): string {
 
 export async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
   let response: Response
+  let text: string
 
   try {
     response = await fetch(`${API_URL}${path}`, {
@@ -26,12 +27,12 @@ export async function request<T>(path: string, options: RequestInit = {}): Promi
         ...options.headers,
       },
     })
+    text = await response.text()
   } catch {
     // A ação pode ter chegado ao servidor. Nunca repetir POST automaticamente.
     throw new ApiError('Não foi possível confirmar a operação. Verifique sua conexão e atualize os dados antes de tentar novamente.', 0)
   }
 
-  const text = await response.text()
   let data: unknown
 
   try {

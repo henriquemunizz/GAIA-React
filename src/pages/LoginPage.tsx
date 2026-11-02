@@ -43,6 +43,7 @@ export function LoginPage({ signingUp = false }: { signingUp?: boolean }) {
   if (user) return <Navigate to={destination} replace />
 
   const createAccount = signingUp && !registered
+  const adminLogin = !signingUp && location.state?.admin === true
 
   return (
     <main className="flex-1">
@@ -57,7 +58,8 @@ export function LoginPage({ signingUp = false }: { signingUp?: boolean }) {
           </div>
         </div>
         <form onSubmit={(event) => void handleSubmit(submit)(event)} noValidate className="card space-y-5">
-          <h2 className="text-2xl font-bold">{createAccount ? 'Crie sua conta' : 'Entre na sua conta'}</h2>
+          <h2 className="text-2xl font-bold">{createAccount ? 'Crie sua conta' : adminLogin ? 'Login de administrador' : 'Entre na sua conta'}</h2>
+          {adminLogin && <p className="text-sm leading-6 text-slate-600">Entre com sua conta de administrador para cadastrar e alterar missões e recompensas.</p>}
           <Feedback error={error || sessionError} message={registered ? 'Conta criada! Digite sua senha para entrar.' : undefined} />
           {location.state?.from && <p className="text-sm text-slate-600">Entre para continuar. Se sua sessão expirou, faça login novamente.</p>}
           <AccountFields register={register} errors={errors} signingUp={createAccount} />
@@ -68,6 +70,11 @@ export function LoginPage({ signingUp = false }: { signingUp?: boolean }) {
               {createAccount ? 'Entrar' : 'Criar conta'}
             </Link>
           </p>
+          <div className="space-y-3 border-t border-gaia-100 pt-5">
+            <h3 className="text-sm font-bold text-gaia-900">Acesso de administrador</h3>
+            <p className="text-sm leading-6 text-slate-600">Administradores podem cadastrar, alterar, excluir e desativar missões e recompensas. Esse acesso exige uma conta já autorizada como administrador.</p>
+            {createAccount && <Link className="btn-secondary block text-center" to="/solucao" state={{ from: location.state?.from, admin: true }}>Entrar como administrador</Link>}
+          </div>
         </form>
       </section>
     </main>

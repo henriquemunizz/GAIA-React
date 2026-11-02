@@ -96,8 +96,9 @@ export function CatalogPage({ mission = false }: { mission?: boolean }) {
 
   function deactivate(item: Mission | Reward) {
     return perform(async () => {
-      if ('dificuldade' in item) await updateMission(item.id, { ...item, ativo: 0 })
-      else await updateReward(item.id, { ...item, ativo: 0 })
+      const data = { nome: item.nome, descricao: item.descricao, pontos: item.pontos, ativo: 0 as const }
+      if ('dificuldade' in item) await updateMission(item.id, { ...data, dificuldade: item.dificuldade })
+      else await updateReward(item.id, data)
       setMessage('Item desativado. O histórico foi preservado.')
       reload()
     })

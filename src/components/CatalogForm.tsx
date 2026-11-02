@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import type { Mission, NewMission } from '../types/mission'
 import type { Reward } from '../types/reward'
@@ -11,6 +12,7 @@ interface CatalogFormProps {
 }
 
 export function CatalogForm({ mission, item, busy, onSave, onCancel }: CatalogFormProps) {
+  const heading = useRef<HTMLHeadingElement>(null)
   const { register, handleSubmit, formState: { errors } } = useForm<NewMission>({
     defaultValues: {
       nome: item?.nome ?? '',
@@ -21,9 +23,13 @@ export function CatalogForm({ mission, item, busy, onSave, onCancel }: CatalogFo
     },
   })
 
+  useEffect(() => {
+    heading.current?.focus()
+  }, [])
+
   return (
     <form className="card space-y-5" onSubmit={handleSubmit(onSave)} noValidate aria-label={item ? 'Editar item' : 'Cadastrar item'}>
-      <h3 className="text-xl font-bold">{item ? 'Editar' : 'Cadastrar'} {mission ? 'missão' : 'recompensa'}</h3>
+      <h3 ref={heading} tabIndex={-1} className="text-xl font-bold">{item ? 'Editar' : 'Cadastrar'} {mission ? 'missão' : 'recompensa'}</h3>
       <fieldset disabled={busy} className="grid gap-5 sm:grid-cols-2">
         <div className="sm:col-span-2">
           <label htmlFor="item-name" className="text-sm font-semibold">Nome</label>
