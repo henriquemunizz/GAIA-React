@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom'
 
 const features = [
   { number: '01', title: 'Sobre o projeto', description: 'Conheça o problema, a solução proposta e a jornada construída pelo grupo.', to: '/sobre' },
-  { number: '02', title: 'Assistente', description: 'Conclua missões sustentáveis e receba pontos extras com a GAIA.', to: '/assistente' },
-  { number: '03', title: 'Loja', description: 'Transforme seu progresso em acessórios para personalizar o avatar.', to: '/loja' },
+  { number: '02', title: 'Solução GAIA', description: 'Acesse seu perfil e conclua missões sustentáveis para ganhar pontos.', to: '/solucao' },
+  { number: '03', title: 'Recompensas', description: 'Transforme seu progresso em recompensas para sua jornada.', to: '/solucao/recompensas' },
   { number: '04', title: 'Nossa equipe', description: 'Conheça os estudantes responsáveis pela criação da experiência.', to: '/integrantes' },
 ]
 
@@ -31,7 +31,7 @@ export function HomePage() {
 
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
-                to="/assistente"
+                to="/solucao"
                 className="group flex items-center gap-3 rounded-2xl bg-white py-2 pl-6 pr-2 text-sm font-bold text-gaia-700 transition-all duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-gaia-50 active:scale-[0.98]"
               >
                 Testar Funcionalidades

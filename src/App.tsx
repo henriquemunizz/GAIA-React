@@ -1,20 +1,21 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { Layout } from './components/Layout'
-import { PointsProvider } from './context/PointsProvider'
+import { RequireAuth } from './components/SolutionLayout'
+import { AuthProvider } from './context/AuthProvider'
 import { AboutPage } from './pages/AboutPage'
-import { AccessoryPage } from './pages/AccessoryPage'
-import { AssistantPage } from './pages/AssistantPage'
+import { CatalogPage } from './pages/CatalogPage'
 import { ContactPage } from './pages/ContactPage'
 import { FaqPage } from './pages/FaqPage'
 import { HomePage } from './pages/HomePage'
+import { LoginPage } from './pages/LoginPage'
 import { MembersPage } from './pages/MembersPage'
 import { NotFoundPage } from './pages/NotFoundPage'
-import { StorePage } from './pages/StorePage'
+import { ProfilePage } from './pages/ProfilePage'
 
 function App() {
   return (
     <BrowserRouter>
-      <PointsProvider>
+      <AuthProvider>
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<HomePage />} />
@@ -22,13 +23,21 @@ function App() {
             <Route path="/integrantes" element={<MembersPage />} />
             <Route path="/faq" element={<FaqPage />} />
             <Route path="/contato" element={<ContactPage />} />
-            <Route path="/assistente" element={<AssistantPage />} />
-            <Route path="/loja" element={<StorePage />} />
-            <Route path="/loja/:id" element={<AccessoryPage />} />
+            <Route path="/solucao" element={<LoginPage key="login" />} />
+            <Route path="/solucao/cadastro" element={<LoginPage key="register" signingUp />} />
+            <Route element={<RequireAuth />}>
+              <Route path="/solucao/perfil" element={<ProfilePage />} />
+              <Route path="/solucao/missoes" element={<CatalogPage key="missions" mission />} />
+              <Route path="/solucao/recompensas" element={<CatalogPage key="rewards" />} />
+            </Route>
+            <Route path="/assistente" element={<Navigate to="/solucao/missoes" replace />} />
+            <Route path="/loja" element={<Navigate to="/solucao/recompensas" replace />} />
+            <Route path="/loja/:id" element={<Navigate to="/solucao/recompensas" replace />} />
+            <Route path="/membros" element={<Navigate to="/integrantes" replace />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
-      </PointsProvider>
+      </AuthProvider>
     </BrowserRouter>
   )
 }

@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { usePoints } from '../context/usePoints'
+import { useAuth } from '../context/useAuth'
 
 const links = [
   { to: '/', label: 'Home', end: true },
@@ -7,12 +7,11 @@ const links = [
   { to: '/integrantes', label: 'Integrantes' },
   { to: '/faq', label: 'FAQ' },
   { to: '/contato', label: 'Contato' },
-  { to: '/assistente', label: 'Assistente' },
-  { to: '/loja', label: 'Loja' },
+  { to: '/solucao', label: 'Solução' },
 ]
 
 export function Header() {
-  const { points } = usePoints()
+  const { user } = useAuth()
 
   return (
     <header className="border-b border-slate-200/70 border-t-4 border-t-gaia-600 bg-white px-3 py-3 text-slate-900 sm:px-5 sm:py-4">
@@ -49,9 +48,7 @@ export function Header() {
             </NavLink>
           ))}
 
-          <span className="ml-1 shrink-0 rounded-full bg-gaia-50 px-3 py-2 text-xs font-bold text-gaia-700">
-            {points} pts
-          </span>
+          {user && <NavLink to="/solucao/perfil" className="ml-1 max-w-32 shrink-0 truncate rounded-full bg-gaia-50 px-3 py-2 text-xs font-bold text-gaia-700">{user.nomeUsuario}</NavLink>}
         </div>
       </nav>
     </header>
