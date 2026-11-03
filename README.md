@@ -171,7 +171,7 @@ Antes de usar esta versão com um Oracle que ainda tenha perfis textuais, execut
 
 Missões podem ser concluídas repetidamente. Cada ação faz um POST, bloqueia duplo clique e usa o progresso retornado pelo servidor. Não há reenvio automático de mutações. Em falha de conexão, atualize progresso e histórico antes de decidir repetir uma ação.
 
-Administradores veem todos os itens, inclusive inativos. Usuários comuns veem apenas ativos. DELETE é definitivo; o conflito `409` por histórico oferece desativação com `ativo=0`. PUT dos catálogos retorna `200` vazio, e exclusão/logout retornam `204`.
+Nas listagens de missões e recompensas, usuários comuns veem apenas itens ativos (`ativo=1`). Administradores continuam vendo todos os itens, inclusive inativos, para poder editá-los ou reativá-los. Itens inativos não podem ser concluídos ou resgatados. Os históricos já registrados são preservados. DELETE é definitivo; o conflito `409` por histórico oferece desativação com `ativo=0`. PUT dos catálogos retorna `200` vazio, e exclusão/logout retornam `204`.
 
 Os testes em `tests/api.test.mjs` verificam os contratos HTTP sem acessar o banco. O roteiro de verificação pelas telas está em [docs/validacao-integracao.md](docs/validacao-integracao.md).
 

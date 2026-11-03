@@ -52,7 +52,7 @@ export function CatalogForm({ mission, item, busy, onSave, onCancel }: CatalogFo
           </select>
         </div>
       </fieldset>
-      <p className="text-xs leading-5 text-slate-500">Itens inativos deixam de aparecer para os usuários. O histórico já registrado é preservado.</p>
+      <p className="text-xs leading-5 text-slate-500">Itens inativos ficam ocultos para usuários comuns, mas continuam visíveis para administradores. O histórico já registrado é preservado.</p>
       <div className="flex flex-wrap gap-3">
         <button className="btn-primary" type="submit" disabled={busy}>{busy ? 'Salvando...' : item ? 'Salvar alterações' : 'Cadastrar item'}</button>
         <button className="btn-secondary" type="button" disabled={busy} onClick={onCancel}>Cancelar</button>
