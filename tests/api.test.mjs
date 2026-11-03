@@ -15,11 +15,11 @@ test('envia cookie de sessão e JSON, sem autenticação Bearer', async () => {
   let sent
   globalThis.fetch = async (url, options) => {
     sent = { url, ...options }
-    return Response.json({ id: 1, nomeUsuario: 'teste', perfil: 'USUARIO' })
+    return Response.json({ id: 1, nomeUsuario: 'teste', perfil: 0 })
   }
   const body = JSON.stringify({ nomeUsuario: 'teste', senha: 'senha-de-teste' })
   const user = await request('/usuarios/login', { method: 'POST', body })
-  assert.equal(user.perfil, 'USUARIO')
+  assert.equal(user.perfil, 0)
   assert.equal(sent.url, 'http://localhost:8080/usuarios/login')
   assert.equal(sent.credentials, 'include')
   assert.equal(sent.headers['Content-Type'], 'application/json')

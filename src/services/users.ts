@@ -1,7 +1,7 @@
-import type { Credentials, User, UserUpdate } from '../types/user'
+import type { Credentials, Registration, User, UserUpdate } from '../types/user'
 import { request } from './api'
 
-export function registerUser(data: Credentials): Promise<User> {
+export function registerUser(data: Registration): Promise<User> {
   return request('/usuarios', { method: 'POST', body: JSON.stringify(data) })
 }
 

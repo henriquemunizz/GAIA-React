@@ -82,7 +82,7 @@ export function ProfilePage() {
         <form className="card space-y-5" onSubmit={(event) => void handleSubmit(save)(event)} noValidate>
           <div>
             <h2 className="text-2xl font-bold">Meu perfil</h2>
-            <p className="mt-2 text-sm text-slate-500">Conta #{user?.id} · {user?.perfil === 'ADMIN' ? 'Administrador' : 'Usuário'}</p>
+            <p className="mt-2 text-sm text-slate-500">Conta #{user?.id} · {user?.perfil === 1 ? 'Administrador' : 'Usuário'}</p>
           </div>
           <fieldset disabled={isSubmitting || deleting} className="space-y-5">
             <AccountFields register={register} errors={errors} editing />

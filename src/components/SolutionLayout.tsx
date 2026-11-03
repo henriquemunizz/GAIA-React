@@ -82,7 +82,7 @@ function SolutionLayout() {
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="min-w-0">
             <h2 className="break-words text-2xl font-bold">Olá, {user?.nomeUsuario}!</h2>
-            <p className="mt-1 text-sm text-gaia-700">{user?.perfil === 'ADMIN' ? 'Administrador' : 'Sua próxima ação faz a diferença.'}</p>
+            <p className="mt-1 text-sm text-gaia-700">{user?.perfil === 1 ? 'Administrador' : 'Sua próxima ação faz a diferença.'}</p>
           </div>
           <button className="btn-secondary" disabled={leaving} onClick={handleLogout}>{leaving ? 'Saindo...' : 'Sair'}</button>
         </div>

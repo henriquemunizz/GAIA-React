@@ -75,6 +75,20 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+.gaia-modal {
+  width: min(42rem, calc(100% - 2rem));
+  max-height: calc(100dvh - 2rem);
+  margin: auto;
+  padding: 0;
+  border: 0;
+  overflow-y: auto;
+}
+
+.gaia-modal::backdrop {
+  background: rgb(32 27 70 / 60%);
+  backdrop-filter: blur(3px);
+}
+
 ::selection {
   background: var(--color-gaia-200);
   color: var(--color-gaia-950);

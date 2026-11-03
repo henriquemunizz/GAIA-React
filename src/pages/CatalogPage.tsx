@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { CatalogForm } from '../components/CatalogForm'
 import { Feedback } from '../components/Feedback'
+import { Modal } from '../components/Modal'
 import { useAuth } from '../context/useAuth'
 import { useSolution } from '../context/useSolution'
 import { ApiError, errorMessage } from '../services/api'
@@ -24,7 +25,7 @@ export function CatalogPage({ mission = false }: { mission?: boolean }) {
   const [conflictId, setConflictId] = useState<number | null>(null)
   const [busy, setBusy] = useState(false)
   const locked = useRef(false)
-  const admin = user?.perfil === 'ADMIN'
+  const admin = user?.perfil === 1
 
   useEffect(() => {
     let active = true
@@ -51,7 +52,6 @@ export function CatalogPage({ mission = false }: { mission?: boolean }) {
     setBusy(true)
     setError('')
     setMessage('')
-    setConflictId(null)
     try {
       await action()
     } catch (error) {
@@ -83,13 +83,12 @@ export function CatalogPage({ mission = false }: { mission?: boolean }) {
       try {
         if (mission) await deleteMission(item.id)
         else await deleteReward(item.id)
+        setDeleting(null)
         setMessage('Item excluído com sucesso.')
         reload()
       } catch (error) {
         if (error instanceof ApiError && error.status === 409) setConflictId(item.id)
         throw error
-      } finally {
-        setDeleting(null)
       }
     })
   }
@@ -99,6 +98,8 @@ export function CatalogPage({ mission = false }: { mission?: boolean }) {
       const data = { nome: item.nome, descricao: item.descricao, pontos: item.pontos, ativo: 0 as const }
       if ('dificuldade' in item) await updateMission(item.id, { ...data, dificuldade: item.dificuldade })
       else await updateReward(item.id, data)
+      setDeleting(null)
+      setConflictId(null)
       setMessage('Item desativado. O histórico foi preservado.')
       reload()
     })
@@ -118,7 +119,14 @@ export function CatalogPage({ mission = false }: { mission?: boolean }) {
   }
 
   const visibleItems = admin ? items : items.filter((item) => item.ativo === 1)
-  const conflict = items.find((item) => item.id === conflictId)
+
+  function closeModal() {
+    if (locked.current) return
+    setEditing(null)
+    setDeleting(null)
+    setConflictId(null)
+    setError('')
+  }
 
   return (
     <section className="space-y-5" aria-label={mission ? 'Missões' : 'Recompensas'}>
@@ -132,20 +140,29 @@ export function CatalogPage({ mission = false }: { mission?: boolean }) {
           {admin && <button className="btn-primary" disabled={busy} onClick={() => { setEditing('new'); setDeleting(null); setError(''); setMessage('') }}>Nova {mission ? 'missão' : 'recompensa'}</button>}
         </div>
       </div>
-      <Feedback error={error} message={message} />
-      {admin && conflict && <div className="card space-y-3">
-        <p className="text-sm">Este item tem histórico e não pode ser excluído. Você pode desativá-lo.</p>
-        <button className="btn-secondary" disabled={busy || conflict.ativo === 0} onClick={() => void deactivate(conflict)}>Desativar item</button>
-      </div>}
-      {admin && editing && <CatalogForm key={editing === 'new' ? 'new' : editing.id} mission={mission} item={editing === 'new' ? undefined : editing} busy={busy} onSave={save} onCancel={() => setEditing(null)} />}
-      {admin && deleting && <div className="card space-y-4" role="region" aria-label="Confirmar exclusão">
-        <h3 className="text-lg font-bold">Excluir {deleting.nome}?</h3>
-        <p className="text-sm text-slate-600">A exclusão é definitiva. Itens com histórico só podem ser desativados.</p>
-        <div className="flex flex-wrap gap-3">
-          <button className="btn-danger" disabled={busy} onClick={() => void remove(deleting)}>Confirmar exclusão</button>
-          <button className="btn-secondary" disabled={busy} onClick={() => setDeleting(null)}>Cancelar</button>
+      <Feedback error={admin && (editing || deleting) ? undefined : error} message={message} />
+      {admin && editing && <Modal title={`${editing === 'new' ? 'Cadastrar' : 'Editar'} ${mission ? 'missão' : 'recompensa'}`} busy={busy} onClose={closeModal}>
+        <div className="space-y-5">
+          <Feedback error={error} />
+          <CatalogForm key={editing === 'new' ? 'new' : editing.id} mission={mission} item={editing === 'new' ? undefined : editing} busy={busy} onSave={save} onCancel={closeModal} />
         </div>
-      </div>}
+      </Modal>}
+      {admin && deleting && <Modal title={`Excluir ${mission ? 'missão' : 'recompensa'}`} busy={busy} onClose={closeModal}>
+        <div className="space-y-4">
+          <p className="break-words font-semibold">Excluir {deleting.nome}?</p>
+          <p className="text-sm text-slate-600">A exclusão é definitiva. Itens com histórico só podem ser desativados.</p>
+          <Feedback error={error} />
+          {conflictId === deleting.id && <p className="text-sm text-slate-600">Você pode desativar este item para retirá-lo do catálogo, mantendo o histórico.</p>}
+          <div className="flex flex-wrap gap-3">
+            {conflictId === deleting.id ? (
+              <button className="btn-primary" disabled={busy || deleting.ativo === 0} onClick={() => void deactivate(deleting)}>Desativar item</button>
+            ) : (
+              <button className="btn-danger" disabled={busy} onClick={() => void remove(deleting)}>{busy ? 'Excluindo...' : 'Confirmar exclusão'}</button>
+            )}
+            <button className="btn-secondary" disabled={busy} onClick={closeModal}>Cancelar</button>
+          </div>
+        </div>
+      </Modal>}
       {loading && <p className="py-10 text-center text-slate-500" role="status">Carregando {mission ? 'missões' : 'recompensas'}...</p>}
       <Feedback error={loadError} />
       {!loading && !loadError && visibleItems.length === 0 && <p className="card text-center text-slate-500">Nenhuma {mission ? 'missão' : 'recompensa'} disponível no momento.</p>}

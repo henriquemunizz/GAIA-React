@@ -37,8 +37,8 @@ Os testes cobrem envio de cookie e JSON, ausência de Bearer, PUT 200 vazio, DEL
 ## Roteiro para repetir
 
 1. Inicie a API com `GAIA_FRONTEND_ORIGIN=http://localhost:5173` e o front com `npm run dev`.
-2. No cadastro, confira os campos obrigatórios e o atalho administrativo. Crie uma conta temporária USUARIO; não altere perfis pelo cliente.
-3. Com uma conta ADMIN já configurada, crie uma missão e uma recompensa identificadas como teste. Edite dificuldade, pontos e descrição.
+2. No cadastro, confira os campos obrigatórios, a escolha de tipo de conta (Usuário = 0, Administrador = 1) e o atalho administrativo. Crie uma conta temporária de cada tipo.
+3. Com a conta Administrador, crie uma missão e uma recompensa identificadas como teste. Edite dificuldade, pontos e descrição nos cards sobrepostos.
 4. Na conta comum, conclua a mesma missão duas vezes; confira pontos, quantidade de conclusões e históricos. Resgate uma recompensa e tente outra sem saldo.
 5. Recarregue a página, edite o nome da própria conta sem preencher a senha e confirme a persistência.
 6. Como ADMIN, tente excluir os itens com histórico: a API deve retornar 409. Use a alternativa de desativação e confira que os itens deixam de aparecer para USUARIO.
@@ -49,4 +49,16 @@ Os testes cobrem envio de cookie e JSON, ausência de Bearer, PUT 200 vazio, DEL
 
 A troca de senha pela tela e a espera real de 30 minutos pela expiração não foram executadas. O frontend valida senha, omite o campo vazio em atualizações e trata 401; as regras de sessão e autorização permanecem sob responsabilidade da API. Os testes HTTP de 400/401/403/409 usam respostas simuladas e complementam, sem substituir, os testes reais listados acima.
 
-As exclusões definitivas e a limpeza dos dados temporários aguardam confirmação do responsável pelo ambiente.
+Na rodada de 02/11, as exclusões definitivas não foram executadas. A rodada abaixo validou a exclusão de dois novos itens, após autorização do responsável.
+
+## Perfis numéricos e cards sobrepostos — 03/11/2026
+
+- Oracle convertido de ADMIN/USUARIO para `NUMBER(1)` com valores 1/0. Foram comparados os dados antes e depois da migração: 3 contas, 3 registros de progresso, 5 conclusões, 2 resgates, 3 missões e 3 recompensas preservados. A coluna textual anterior foi mantida como respaldo.
+- A conta administrativa existente entrou com a mesma senha e manteve 60 pontos totais, saldo 10 e 3 conclusões.
+- Cadastro e login pelas telas aprovados para os dois tipos. A conta `qa_admin_perfil_1103` recebeu controles administrativos; `qa_usuario_perfil_1103` não recebeu esses controles. Ambas ficaram disponíveis no ambiente de testes.
+- Missão e recompensa `QA modal 1103` cadastradas e editadas pelos cards sobrepostos. Os dois itens foram excluídos pelas telas, com autorização específica, e desapareceram do catálogo. Nenhum registro anterior foi excluído.
+- Formulários, confirmação de exclusão e mensagens de validação aparecem dentro do card. Fundo escurecido, bloqueio de rolagem, Escape, Cancelar e retorno do foco ao botão de origem conferidos.
+- Card de recompensa verificado em 390 × 844, centralizado e sem overflow horizontal. As dimensões do navegador foram restauradas após o teste.
+- `npm run lint`, os 9 testes HTTP e `npm run build` aprovados. Na API, `mvn clean package` com JDK 21 aprovou compilação, empacotamento e 10 testes.
+
+Nesta rodada, o conflito 409 com desativação não foi repetido pelas telas para preservar os itens e históricos existentes. A troca de senha e a expiração por tempo continuam com os limites descritos acima.

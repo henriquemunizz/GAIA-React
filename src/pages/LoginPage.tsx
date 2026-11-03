@@ -7,12 +7,13 @@ import { PageHeader } from '../components/PageHeader'
 import { useAuth } from '../context/useAuth'
 import { errorMessage } from '../services/api'
 import { login, registerUser } from '../services/users'
-import type { Credentials } from '../types/user'
+import type { Credentials, User } from '../types/user'
 
 export function LoginPage({ signingUp = false }: { signingUp?: boolean }) {
   const { user, loading, error: sessionError, setUser } = useAuth()
   const location = useLocation()
   const [registered, setRegistered] = useState(false)
+  const [profile, setProfile] = useState<User['perfil']>(0)
   const [error, setError] = useState('')
   const busy = useRef(false)
   const { register, handleSubmit, resetField, formState: { errors, isSubmitting } } = useForm<Credentials>()
@@ -26,7 +27,7 @@ export function LoginPage({ signingUp = false }: { signingUp?: boolean }) {
 
     try {
       if (signingUp && !registered) {
-        await registerUser(data)
+        await registerUser({ ...data, perfil: profile })
         setRegistered(true)
         resetField('senha')
       } else {
@@ -63,6 +64,14 @@ export function LoginPage({ signingUp = false }: { signingUp?: boolean }) {
           <Feedback error={error || sessionError} message={registered ? 'Conta criada! Digite sua senha para entrar.' : undefined} />
           {location.state?.from && <p className="text-sm text-slate-600">Entre para continuar. Se sua sessão expirou, faça login novamente.</p>}
           <AccountFields register={register} errors={errors} signingUp={createAccount} />
+          {createAccount && <div>
+            <label htmlFor="profile" className="text-sm font-semibold text-slate-700">Tipo de conta</label>
+            <select id="profile" className="field" value={profile} disabled={isSubmitting} onChange={(event) => setProfile(Number(event.target.value) as User['perfil'])} aria-describedby="profile-help">
+              <option value={0}>Usuário</option>
+              <option value={1}>Administrador</option>
+            </select>
+            <p id="profile-help" className="mt-2 text-xs leading-5 text-slate-500">{profile === 1 ? 'Administradores podem cadastrar, alterar, excluir e desativar missões e recompensas.' : 'Usuários podem concluir missões, ganhar pontos e resgatar recompensas.'}</p>
+          </div>}
           <button type="submit" disabled={isSubmitting} className="btn-primary w-full">{isSubmitting ? 'Aguarde...' : createAccount ? 'Cadastrar' : 'Entrar'}</button>
           <p className="text-center text-sm text-slate-600">
             {createAccount ? 'Já tem conta? ' : 'Ainda não tem conta? '}
@@ -72,7 +81,7 @@ export function LoginPage({ signingUp = false }: { signingUp?: boolean }) {
           </p>
           <div className="space-y-3 border-t border-gaia-100 pt-5">
             <h3 className="text-sm font-bold text-gaia-900">Acesso de administrador</h3>
-            <p className="text-sm leading-6 text-slate-600">Administradores podem cadastrar, alterar, excluir e desativar missões e recompensas. Esse acesso exige uma conta já autorizada como administrador.</p>
+            <p className="text-sm leading-6 text-slate-600">Administradores podem cadastrar, alterar, excluir e desativar missões e recompensas. Escolha Administrador ao criar sua conta ou entre com uma conta administrativa existente.</p>
             {createAccount && <Link className="btn-secondary block text-center" to="/solucao" state={{ from: location.state?.from, admin: true }}>Entrar como administrador</Link>}
           </div>
         </form>

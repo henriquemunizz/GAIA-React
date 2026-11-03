@@ -153,16 +153,21 @@ A integração segue os controllers e DTOs em `gaia-api/src/main/java/br/com/fia
 
 | Recurso | Campos |
 | --- | --- |
-| Cadastro/login | `nomeUsuario`, `senha` |
-| Usuário | `id`, `nomeUsuario`, `perfil` (`USUARIO` ou `ADMIN`) |
+| Cadastro | `nomeUsuario`, `senha`, `perfil` (0 = usuário, 1 = administrador) |
+| Login | `nomeUsuario`, `senha` |
+| Usuário | `id`, `nomeUsuario`, `perfil` (0/1, também numérico no Oracle) |
 | Missão | `id`, `nome`, `descricao`, `pontos`, `dificuldade` (1/2/3), `ativo` (0/1) |
 | Recompensa | `id`, `nome`, `descricao`, `pontos` (custo), `ativo` (0/1) |
 | Progresso | `pontosTotais`, `saldo`, `missoesConcluidas` |
 | Histórico | `id`, `itemId`, `pontos`, `data` |
 
-Cadastro não autentica: após criar a conta, a tela solicita login. Na edição da própria conta, senha vazia é omitida para manter a atual. O perfil não pode ser escolhido pelo cliente.
+Cadastro não autentica: após criar a conta, a tela solicita login. O campo **Tipo de conta** permite escolher Usuário ou Administrador, conforme a regra do projeto. Na edição da própria conta, senha vazia é omitida para manter a atual; essa edição não altera o perfil.
 
-Na tela de cadastro, **Entrar como administrador** abre o login com a explicação das funções administrativas. O atalho usa a mesma autenticação por sessão; só contas com perfil `ADMIN` retornado pela API recebem os controles de cadastro, alteração, exclusão e desativação de missões e recompensas.
+Na tela de cadastro, **Entrar como administrador** abre o login com a explicação das funções administrativas. O atalho usa a mesma autenticação por sessão; só contas com `perfil: 1` retornado pela API recebem os controles de cadastro, alteração, exclusão e desativação de missões e recompensas. Quem escolhe Administrador no cadastro recebe essas permissões. Login envia apenas nome e senha.
+
+Cadastro, edição e confirmação de exclusão de missões/recompensas abrem um card central sobre o catálogo, com fundo escurecido. A janela controla foco e rolagem, fecha por Cancelar, × ou Escape e bloqueia fechamento durante o envio. Erros e a alternativa de desativação por histórico aparecem dentro da janela.
+
+Antes de usar esta versão com um Oracle que ainda tenha perfis textuais, execute `gaia-api/atualizar_perfil.sql` com a API parada e inicie a API atualizada. A migração preserva as contas existentes.
 
 Missões podem ser concluídas repetidamente. Cada ação faz um POST, bloqueia duplo clique e usa o progresso retornado pelo servidor. Não há reenvio automático de mutações. Em falha de conexão, atualize progresso e histórico antes de decidir repetir uma ação.
 
