@@ -51,7 +51,7 @@ export function LoginPage({ signingUp = false }: { signingUp?: boolean }) {
       <PageHeader title="Solução GAIA" description="Pequenas ações, progresso de verdade. Entre para começar sua jornada sustentável." />
       <section className="mx-auto grid max-w-5xl gap-8 px-4 py-12 md:grid-cols-2 sm:py-16">
         <div className="rounded-[1.25rem] bg-gaia-100 p-8">
-          <img src="/images/gaia-robot.png" alt="Robô Gaia com olhos sorridentes" className="mb-6 h-28 w-28 object-contain" />
+          <img src="/images/gaia-login.png" alt="Gaia segurando um painel de sustentabilidade" className="mb-6 h-auto w-56 max-w-full object-contain" />
           <h2 className="text-3xl font-extrabold text-gaia-900">Cada ação conta.</h2>
           <p className="mt-4 text-sm leading-7 text-slate-600">Acompanhe seu perfil, conclua missões quantas vezes realizar cada atividade e use seus pontos para resgatar recompensas.</p>
           <div className="mt-6 flex flex-wrap gap-2 text-xs font-semibold text-gaia-700">

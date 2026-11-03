@@ -90,7 +90,7 @@ export function ProfilePage() {
           <button className="btn-primary" type="submit" disabled={isSubmitting || deleting}>{isSubmitting ? 'Salvando...' : 'Salvar perfil'}</button>
         </form>
         <aside className="rounded-[1.25rem] bg-gaia-100 p-7">
-          <img src="/images/gaia-robot.png" alt="" className="h-24 w-24 object-contain" />
+          <img src="/images/gaia-perfil.png" alt="Gaia comemorando suas conquistas" className="h-auto w-48 max-w-full object-contain" />
           <h2 className="mt-5 text-2xl font-bold text-gaia-900">Sua evolução fica aqui.</h2>
           <p className="mt-4 text-sm leading-7 text-slate-600">Os pontos totais somam todas as suas conquistas. O saldo é o que você ainda pode usar em recompensas. Cada conclusão de missão conta, inclusive quando você repete a atividade.</p>
           <p className="mt-4 text-sm leading-7 text-slate-600">O histórico guarda os pontos de cada ação, mesmo que a missão ou recompensa seja editada depois.</p>
