@@ -8,21 +8,17 @@
 
 ## Descrição do projeto
 
-O **GAIA** é um projeto acadêmico desenvolvido para o **Challenge SoulUp da FIAP**. A solução apresenta uma assistente virtual em formato de avatar que orienta os usuários dentro da plataforma SoulUp, incentiva a conclusão de missões sustentáveis e oferece pontos extras.
-
-Os pontos recebidos podem ser utilizados em uma loja de acessórios para personalizar a GAIA. Nesta Sprint 4, o projeto original foi migrado para uma aplicação **SPA** (*Single Page Application*) com React, Vite e TypeScript.
-
-O projeto GAIA atende ao **Desafio 3 – Avatar Inteligente e Interativo**, buscando aumentar o engajamento dos usuários da SoulUp por meio de orientações personalizadas, acompanhamento de missões, notificações e interações adaptadas ao perfil do usuário.
-
-A solução combina **inteligência, gamificação e personalização** e possui integração com a API presente no projeto. Embora os dados locais sejam utilizados como apoio durante a avaliação da interface, a aplicação está preparada para consumir os serviços da API Java. O usuário pode receber pontos extras ao concluir missões e interações e utilizá-los para adquirir acessórios para personalizar a GAIA.
+O **GAIA** é uma assistente virtual para o Challenge SoulUp da FIAP. Na área Solução, o usuário acompanha seu progresso, conclui missões sustentáveis, troca pontos por recompensas e conversa com a Gaia sobre sua jornada.
 
 ## Funcionalidades
 
 - Navegação SPA entre todas as páginas;
-- Registro da conclusão de missões;
-- Saldo de pontos compartilhado entre as páginas;
-- Loja de acessórios;
-- Página dinâmica de detalhes de cada acessório;
+- Cadastro, login por sessão e logout;
+- Consulta, edição e exclusão da própria conta;
+- Conclusão repetida de missões e resgate de recompensas;
+- Chat com a Gaia e histórico de conversas;
+- Progresso e históricos fornecidos pela API;
+- Cadastro, edição, exclusão e desativação de missões/recompensas para administradores;
 - Validação do formulário de contato;
 - Página de integrantes;
 - Layout responsivo para celulares e computadores;
@@ -30,36 +26,23 @@ A solução combina **inteligência, gamificação e personalização** e possui
 
 ## Imagens do projeto
 
-As imagens abaixo são exemplos de caminhos esperados para os arquivos visuais do projeto. Adicione os arquivos correspondentes na pasta `public/images/` para que sejam exibidos no GitHub.
+**Chat com a Gaia**
 
-### Tela inicial
+Conversa de exemplo: Mariana pergunta qual missão pode fazer e a Gaia explica como ganhar pontos.
 
-![Tela inicial da aplicação](public/images/home.jpeg)
+![Conversa de Mariana com a Gaia sobre a missão de reciclagem](public/images/gaia-chat.png)
 
-Na página inicial, foram acrescentados cartões interativos que facilitam a navegação entre as principais áreas do site, como Sobre, Assistente, Loja, Integrantes e FAQ.
+**Perfil e progresso**
 
-### Assistente e missões
+![Perfil do usuário com o progresso na jornada](public/images/gaia-perfil-validado.png)
 
-![Tela da assistente virtual e das missões](public/images/assistente-missoes.jpeg)
+**Edição do catálogo pelo administrador**
 
-Integrada à API Java, permite visualizar e concluir missões sustentáveis para ganhar pontos.
+![Formulário de edição sobre o catálogo](public/images/gaia-modal-edicao.png)
 
-### Loja de acessórios
+**Visualização no celular**
 
-![Loja de acessórios da GAIA](public/images/loja.jpeg)
-
-Permite utilizar os pontos acumulados para adquirir acessórios e personalizar a GAIA.
-
-### Detalhes de um acessório
-
-![Página de detalhes de um acessório](public/images/detalhes-acessorio.jpeg)
-
-### Responsividade
-
-![Aplicação em dispositivo móvel](public/images/responsividade.jpeg)
-
-Projeto com responsividade
-
+![Modal de administração em tela de celular](public/images/gaia-modal-celular.png)
 
 ## Tecnologias utilizadas
 
@@ -73,10 +56,16 @@ Projeto com responsividade
 
 ## Como usar
 
+- **Repositório GitHub:** [GAIA-React](https://github.com/henriquemunizz/GAIA-React)
+- **Aplicação publicada na Vercel:** [Acessar aplicação](https://gaia-react.vercel.app/)
+- **API Java publicada:**  [Acessar API](https://api-java-gaia.onrender.com/)
+- **Repositório API no GitHub:**[REPO-API](https://github.com/henriquemunizz/api-java-gaia)
+- **Vídeo de apresentação no YouTube:** [Assistir ao vídeo](https://youtu.be/hf6ZWBWJSaQ)
+
 ### Pré-requisitos
 
-- Node.js instalado;
-- npm instalado.
+- Node.js 22.18+ (ou 24+) e npm instalados;
+- API Java em execução com acesso ao Oracle.
 
 ### Instalação
 
@@ -86,16 +75,25 @@ npm install
 
 ### Execução em ambiente de desenvolvimento
 
+Por padrão, o front-end usa a API publicada no Render. Para usar a API Java local, inicie-a na porta `8080`, copie o arquivo `.env.example` para `.env` na raiz do projeto React e defina:
+
+```env
+VITE_API_URL=http://localhost:8080
+```
+
+Para iniciar o front-end, execute:
+
 ```bash
 npm run dev
 ```
 
-Abra o endereço exibido no terminal, normalmente [`http://localhost:5173`](http://localhost:5173).
+Abra [http://localhost:5173](http://localhost:5173). Se o Vite já estiver em execução, reinicie-o para aplicar as alterações no `.env`.
 
 ### Verificação do projeto
 
 ```bash
 npm run lint
+npm test
 npm run build
 ```
 
@@ -108,9 +106,15 @@ npm run build
 | `/integrantes` | Integrantes |
 | `/faq` | Perguntas frequentes |
 | `/contato` | Contato |
-| `/assistente` | Assistente e missões |
-| `/loja` | Loja de acessórios |
-| `/loja/:id` | Detalhes de um acessório |
+| `/solucao` | Login (ou Perfil, se autenticado) |
+| `/solucao/cadastro` | Cadastro |
+| `/solucao/perfil` | Própria conta, progresso e históricos |
+| `/solucao/missoes` | Missões e administração do catálogo |
+| `/solucao/recompensas` | Recompensas e administração do catálogo |
+| `/solucao/chat` | Chat com a Gaia |
+| `/assistente` | Redirecionamento para o chat |
+| `/loja`, `/loja/:id` | Redirecionamento para recompensas |
+| `/membros` | Redirecionamento para Integrantes |
 
 ## Estrutura de pastas
 
@@ -120,8 +124,9 @@ public/
 
 src/
 ├── components/          # Componentes reutilizáveis
-├── context/             # Estado compartilhado de pontos
-├── data/                # Dados temporários de missões e acessórios
+├── context/             # Sessão e acesso ao progresso da solução
+├── data/                # Dados dos integrantes
+├── services/            # Requisições à API Java
 ├── pages/               # Páginas da aplicação
 ├── types/               # Interfaces TypeScript
 ├── App.tsx              # Rotas da aplicação
@@ -131,7 +136,47 @@ src/
 
 ## Integração com a API
 
-A integração será realizada com a API Java desenvolvida na disciplina de **Domain Driven Design Using Java**. Enquanto o contrato da API não estiver disponível, missões, acessórios e pontos funcionam localmente para permitir a navegação e a avaliação da interface.
+A integração segue os controllers e DTOs em `gaia-api/src/main/java/br/com/fiap/api`. O front mantém a organização em componentes, páginas, tipos e serviços, usando `fetch`, hooks do React e React Hook Form.
+
+### Sessão e origem local
+
+- Na execução da API, configure `GAIA_FRONTEND_ORIGIN=http://localhost:5173` (também é o padrão do backend).
+- Use `localhost` nos dois endereços; não misture com `127.0.0.1`.
+- Todas as requisições usam `credentials: 'include'`. Não há Bearer Token nem credenciais em localStorage.
+- O cookie `JSESSIONID` é gerenciado pelo navegador e é HttpOnly. A sessão é recuperada por `GET /usuarios/me` ao recarregar a página.
+- `401` leva ao login; `403` exibe a negativa da API e reconsulta o perfil. A autorização continua no backend.
+- CORS permite a origem exata com credenciais. Ao mudar a porta do Vite, altere também `GAIA_FRONTEND_ORIGIN` e reinicie ambos.
+- O cookie atual usa SameSite=Strict. Uma futura publicação em sites diferentes precisa de configuração compatível no backend; esta integração é local.
+
+### Contratos utilizados
+
+| Recurso | Campos |
+| --- | --- |
+| Cadastro | `nomeUsuario`, `senha`, `perfil` (0 = usuário, 1 = administrador) |
+| Login | `nomeUsuario`, `senha` |
+| Usuário | `id`, `nomeUsuario`, `perfil` (0/1, também numérico no Oracle) |
+| Missão | `id`, `nome`, `descricao`, `pontos`, `dificuldade` (1/2/3), `ativo` (0/1) |
+| Recompensa | `id`, `nome`, `descricao`, `pontos` (custo), `ativo` (0/1) |
+| Progresso | `pontosTotais`, `saldo`, `missoesConcluidas` |
+| Histórico | `id`, `itemId`, `pontos`, `data` |
+
+Cadastro não autentica: após criar a conta, a tela solicita login. O campo **Tipo de conta** permite escolher Usuário ou Administrador, conforme a regra do projeto. Na edição da própria conta, senha vazia é omitida para manter a atual; essa edição não altera o perfil.
+
+Na tela de cadastro, **Entrar como administrador** abre o login com a explicação das funções administrativas. O atalho usa a mesma autenticação por sessão; só contas com `perfil: 1` retornado pela API recebem os controles de cadastro, alteração, exclusão e desativação de missões e recompensas. Quem escolhe Administrador no cadastro recebe essas permissões. Login envia apenas nome e senha.
+
+Cadastro, edição e confirmação de exclusão de missões/recompensas abrem um card central sobre o catálogo, com fundo escurecido. A janela controla foco e rolagem, fecha por Cancelar, × ou Escape e bloqueia fechamento durante o envio. Erros e a alternativa de desativação por histórico aparecem dentro da janela.
+
+Antes de usar esta versão com um Oracle que ainda tenha perfis textuais, execute `gaia-api/atualizar_perfil.sql` com a API parada e inicie a API atualizada. A migração preserva as contas existentes.
+
+Missões podem ser concluídas repetidamente. Cada ação faz um POST, bloqueia duplo clique e usa o progresso retornado pelo servidor. Não há reenvio automático de mutações. Em falha de conexão, atualize progresso e histórico antes de decidir repetir uma ação.
+
+Nas listagens de missões e recompensas, usuários comuns veem apenas itens ativos (`ativo=1`). Administradores continuam vendo todos os itens, inclusive inativos, para poder editá-los ou reativá-los. Itens inativos não podem ser concluídos ou resgatados. Os históricos já registrados são preservados. DELETE é definitivo; o conflito `409` por histórico oferece desativação com `ativo=0`. PUT dos catálogos retorna `200` vazio, e exclusão/logout retornam `204`.
+
+Os testes em `tests/api.test.mjs` verificam os contratos HTTP sem acessar o banco. O roteiro de verificação pelas telas está em [docs/validacao-integracao.md](docs/validacao-integracao.md).
+
+### Branch de integração
+
+`feature/integracao-api-java` parte de `feature/identidade-visual-soulup` (`02510e7`), que contém os três commits visuais sobre `develop` (`ddaac73`). Essa base preserva a identidade visual já existente. O destino futuro no Git Flow é `develop`; esta etapa não executa merge nem push.
 
 
 ## Integrantes e créditos
@@ -163,14 +208,6 @@ A integração será realizada com a API Java desenvolvida na disciplina de **Do
 - **Turma:** 1TDSPv-2026
 - **GitHub:** [gcosta900](https://github.com/gcosta900)
 - **LinkedIn:** [Gustavo Costa Moreira](https://www.linkedin.com/in/gustavocostamoreira)
-
-## Links da entrega
-
-- **Repositório GitHub:** [GAIA-React](https://github.com/henriquemunizz/GAIA-React)
-- **Aplicação publicada na Vercel:** [Acessar aplicação](https://gaia-react.vercel.app/)
-- **API Java publicada:**  [Acessar API] https://gaia-api-sprint-4.vercel.app/
-- com end points /missoes e /recompensas
-- **Vídeo de apresentação no YouTube:** [Assistir ao vídeo](https://youtu.be/hf6ZWBWJSaQ)
 
 ## Contato
 

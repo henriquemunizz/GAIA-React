@@ -1,27 +1,18 @@
 import type { Mission, NewMission } from '../types/mission'
+import { request } from './api'
 
-const API_URL = (import.meta.env.VITE_API_URL || 'https://gaia-api-sprint-4.vercel.app/').replace(/\/$/, '')
-
-export async function getMissions(): Promise<Mission[]> {
-  const response = await fetch(`${API_URL}/missoes`)
-
-  if (!response.ok) {
-    throw new Error('Não foi possível carregar as missões.')
-  }
-
-  return response.json()
+export function getMissions(): Promise<Mission[]> {
+  return request('/missoes')
 }
 
-export async function createMission(mission: NewMission): Promise<Mission> {
-  const response = await fetch(`${API_URL}/missoes`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(mission),
-  })
+export function createMission(data: NewMission): Promise<Mission> {
+  return request('/missoes', { method: 'POST', body: JSON.stringify(data) })
+}
 
-  if (!response.ok) {
-    throw new Error('Não foi possível cadastrar a missão.')
-  }
+export function updateMission(id: number, data: NewMission): Promise<void> {
+  return request(`/missoes/${id}`, { method: 'PUT', body: JSON.stringify(data) })
+}
 
-  return response.json()
+export function deleteMission(id: number): Promise<void> {
+  return request(`/missoes/${id}`, { method: 'DELETE' })
 }

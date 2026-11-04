@@ -25,7 +25,7 @@ export function ContactPage() {
   }
 
   const inputClass =
-    'mt-2 w-full rounded-xl bg-gaia-50 px-4 py-3 text-sm outline-none ring-1 ring-gaia-900/5 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] focus:bg-white focus:ring-2 focus:ring-gaia-400'
+    'mt-2 w-full rounded-xl bg-gaia-50 px-4 py-3 text-sm outline-none ring-1 ring-gaia-900/5 transition-all duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] focus:bg-white focus:ring-2 focus:ring-gaia-400'
 
   return (
     <main className="flex-1">
@@ -35,7 +35,7 @@ export function ContactPage() {
       />
 
       <div className="mx-auto grid max-w-6xl gap-5 px-4 py-16 sm:py-24 md:grid-cols-[0.8fr_1.2fr]">
-        <section className="rounded-[1.75rem] bg-gaia-950 p-8 text-white">
+        <section className="rounded-[1.25rem] bg-gaia-600 p-8 text-white">
           <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gaia-400">Fale com o grupo</span>
           <h2 className="mt-3 text-3xl font-semibold">Informações do projeto</h2>
           <p className="mt-3 text-sm leading-6 text-gaia-100">Dúvidas, sugestões ou curiosidades sobre a proposta? Estes são os canais do projeto.</p>
@@ -58,11 +58,11 @@ export function ContactPage() {
         </section>
 
         <form
-          className="rounded-[1.75rem] bg-white p-7 ring-1 ring-gaia-900/5 sm:p-9"
+          className="rounded-[1.25rem] bg-white p-7 ring-1 ring-gaia-900/5 sm:p-9"
           onSubmit={handleSubmit(onSubmit)}
           noValidate
         >
-          <h2 className="text-2xl font-semibold text-gaia-950">Envie uma mensagem</h2>
+          <h2 className="text-2xl font-semibold text-slate-900">Envie uma mensagem</h2>
           <p className="mt-2 text-sm text-slate-500">Preencha os campos abaixo e fale com a equipe.</p>
 
           <div className="mt-4">
@@ -116,7 +116,7 @@ export function ContactPage() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="mt-6 w-full rounded-full bg-gaia-950 px-5 py-3.5 font-semibold text-white transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-gaia-700 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60"
+            className="mt-6 w-full rounded-full bg-gaia-600 px-5 py-3.5 font-semibold text-white transition-all duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-gaia-700 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60"
           >
             {isSubmitting ? 'Enviando...' : 'Enviar mensagem'}
           </button>
