@@ -1,7 +1,7 @@
 # GAIA — Assistente Virtual para a SoulUp
 
 - **Aplicação publicada na Vercel:** [Acessar aplicação](https://gaia-react.vercel.app/)
-- - **Vídeo de apresentação no YouTube:** [Assistir ao vídeo](https://youtu.be/hf6ZWBWJSaQ)
+- **Vídeo de apresentação no YouTube:** [Assistir ao vídeo](https://youtu.be/Zjr3SuOMILI)
 
 
 ![Banner do projeto GAIA](public/images/gaia-banner.jpeg)
@@ -60,7 +60,7 @@ Conversa de exemplo: Mariana pergunta qual missão pode fazer e a Gaia explica c
 - **Aplicação publicada na Vercel:** [Acessar aplicação](https://gaia-react.vercel.app/)
 - **API Java publicada:**  [Acessar API](https://api-java-gaia.onrender.com/)
 - **Repositório API no GitHub:**[REPO-API](https://github.com/henriquemunizz/api-java-gaia)
-- **Vídeo de apresentação no YouTube:** [Assistir ao vídeo](https://youtu.be/hf6ZWBWJSaQ)
+- **Vídeo de apresentação no YouTube:** [Assistir ao vídeo](https://youtu.be/Zjr3SuOMILI)
 
 ### Pré-requisitos
 
