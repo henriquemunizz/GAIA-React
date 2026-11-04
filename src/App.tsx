@@ -4,6 +4,7 @@ import { RequireAuth } from './components/SolutionLayout'
 import { AuthProvider } from './context/AuthProvider'
 import { AboutPage } from './pages/AboutPage'
 import { CatalogPage } from './pages/CatalogPage'
+import { ChatPage } from './pages/ChatPage'
 import { ContactPage } from './pages/ContactPage'
 import { FaqPage } from './pages/FaqPage'
 import { HomePage } from './pages/HomePage'
@@ -29,8 +30,9 @@ function App() {
               <Route path="/solucao/perfil" element={<ProfilePage />} />
               <Route path="/solucao/missoes" element={<CatalogPage key="missions" mission />} />
               <Route path="/solucao/recompensas" element={<CatalogPage key="rewards" />} />
+              <Route path="/solucao/chat" element={<ChatPage />} />
             </Route>
-            <Route path="/assistente" element={<Navigate to="/solucao/missoes" replace />} />
+            <Route path="/assistente" element={<Navigate to="/solucao/chat" replace />} />
             <Route path="/loja" element={<Navigate to="/solucao/recompensas" replace />} />
             <Route path="/loja/:id" element={<Navigate to="/solucao/recompensas" replace />} />
             <Route path="/membros" element={<Navigate to="/integrantes" replace />} />

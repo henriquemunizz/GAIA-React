@@ -102,8 +102,8 @@ function SolutionLayout() {
         <Feedback error={error} />
         <div className="flex flex-wrap items-center justify-between gap-4">
           <nav className="flex flex-wrap gap-2" aria-label="Navegação da solução">
-            {['Perfil', 'Missões', 'Recompensas'].map((label, index) => (
-              <NavLink key={label} to={`/solucao/${['perfil', 'missoes', 'recompensas'][index]}`} className={({ isActive }) => `rounded-full px-5 py-3 text-sm font-semibold ${isActive ? 'bg-gaia-600 text-white' : 'bg-white text-gaia-700 hover:bg-gaia-100'}`}>{label}</NavLink>
+            {['Perfil', 'Missões', 'Recompensas', 'Chat'].map((label, index) => (
+              <NavLink key={label} to={`/solucao/${['perfil', 'missoes', 'recompensas', 'chat'][index]}`} className={({ isActive }) => `rounded-full px-5 py-3 text-sm font-semibold ${isActive ? 'bg-gaia-600 text-white' : 'bg-white text-gaia-700 hover:bg-gaia-100'}`}>{label}</NavLink>
             ))}
           </nav>
           <button className="text-sm font-semibold text-gaia-700 underline disabled:opacity-50" disabled={loading} onClick={() => { setLoading(true); void refreshProgress() }}>Atualizar progresso</button>
