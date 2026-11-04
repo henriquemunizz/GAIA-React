@@ -1,5 +1,9 @@
 # GAIA — Assistente Virtual para a SoulUp
 
+- **Aplicação publicada na Vercel:** [Acessar aplicação](https://gaia-react.vercel.app/)
+- - **Vídeo de apresentação no YouTube:** [Assistir ao vídeo](https://youtu.be/hf6ZWBWJSaQ)
+
+
 ![Banner do projeto GAIA](public/images/gaia-banner.jpeg)
 
 ## Descrição do projeto
@@ -54,7 +58,8 @@ Conversa de exemplo: Mariana pergunta qual missão pode fazer e a Gaia explica c
 
 - **Repositório GitHub:** [GAIA-React](https://github.com/henriquemunizz/GAIA-React)
 - **Aplicação publicada na Vercel:** [Acessar aplicação](https://gaia-react.vercel.app/)
-- **API Java publicada:**  [Acessar API](https://gaia-api-sprint-4.vercel.app/)
+- **API Java publicada:**  [Acessar API](https://api-java-gaia.onrender.com/)
+- **Repositório API no GitHub:**[REPO-API](https://github.com/henriquemunizz/api-java-gaia)
 - **Vídeo de apresentação no YouTube:** [Assistir ao vídeo](https://youtu.be/hf6ZWBWJSaQ)
 
 ### Pré-requisitos
@@ -70,13 +75,19 @@ npm install
 
 ### Execução em ambiente de desenvolvimento
 
+Por padrão, o front-end usa a API publicada no Render. Para usar a API Java local, inicie-a na porta `8080`, copie o arquivo `.env.example` para `.env` na raiz do projeto React e defina:
+
+```env
+VITE_API_URL=http://localhost:8080
+```
+
+Para iniciar o front-end, execute:
+
 ```bash
 npm run dev
 ```
 
-Abra [`http://localhost:5173`](http://localhost:5173). O Vite usa `strictPort`: se a porta estiver ocupada, encerra com erro em vez de mudar a origem. Reutilize o servidor existente ou libere a porta.
-
-A URL padrão da API é `http://localhost:8080`. Para configurá-la, copie `.env.example` para `.env` e ajuste `VITE_API_URL`. Reinicie o Vite após mudar variáveis de ambiente.
+Abra [http://localhost:5173](http://localhost:5173). Se o Vite já estiver em execução, reinicie-o para aplicar as alterações no `.env`.
 
 ### Verificação do projeto
 
