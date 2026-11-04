@@ -4,13 +4,7 @@
 
 ## Descrição do projeto
 
-O **GAIA** é um projeto acadêmico desenvolvido para o **Challenge SoulUp da FIAP**. A solução apresenta uma assistente virtual em formato de avatar que orienta os usuários dentro da plataforma SoulUp, incentiva a conclusão de missões sustentáveis e oferece pontos extras.
-
-Os pontos recebidos podem ser utilizados em uma loja de acessórios para personalizar a GAIA. Nesta Sprint 4, o projeto original foi migrado para uma aplicação **SPA** (*Single Page Application*) com React, Vite e TypeScript.
-
-O projeto GAIA atende ao **Desafio 3 – Avatar Inteligente e Interativo**, buscando aumentar o engajamento dos usuários da SoulUp por meio de orientações personalizadas, acompanhamento de missões, notificações e interações adaptadas ao perfil do usuário.
-
-A solução combina **inteligência, gamificação e personalização** e consome a API Java local. A área **Solução** reúne autenticação, perfil, missões, recompensas e históricos. Pontos, saldo e conclusões são confirmados pela API e persistidos no Oracle.
+O **GAIA** é uma assistente virtual para o Challenge SoulUp da FIAP. Na área Solução, o usuário acompanha seu progresso, conclui missões sustentáveis, troca pontos por recompensas e conversa com a Gaia sobre sua jornada.
 
 ## Funcionalidades
 
@@ -18,6 +12,7 @@ A solução combina **inteligência, gamificação e personalização** e consom
 - Cadastro, login por sessão e logout;
 - Consulta, edição e exclusão da própria conta;
 - Conclusão repetida de missões e resgate de recompensas;
+- Chat com a Gaia e histórico de conversas;
 - Progresso e históricos fornecidos pela API;
 - Cadastro, edição, exclusão e desativação de missões/recompensas para administradores;
 - Validação do formulário de contato;
@@ -27,36 +22,23 @@ A solução combina **inteligência, gamificação e personalização** e consom
 
 ## Imagens do projeto
 
-As imagens abaixo são exemplos de caminhos esperados para os arquivos visuais do projeto. Adicione os arquivos correspondentes na pasta `public/images/` para que sejam exibidos no GitHub.
+**Chat com a Gaia**
 
-### Tela inicial
+Conversa de exemplo: Mariana pergunta qual missão pode fazer e a Gaia explica como ganhar pontos.
 
-![Tela inicial da aplicação](public/images/home.jpeg)
+![Conversa de Mariana com a Gaia sobre a missão de reciclagem](public/images/gaia-chat.png)
 
-Na página inicial, foram acrescentados cartões interativos que facilitam a navegação entre as principais áreas do site, como Sobre, Assistente, Loja, Integrantes e FAQ.
+**Perfil e progresso**
 
-### Assistente e missões
+![Perfil do usuário com o progresso na jornada](public/images/gaia-perfil-validado.png)
 
-![Tela da assistente virtual e das missões](public/images/assistente-missoes.jpeg)
+**Edição do catálogo pelo administrador**
 
-Integrada à API Java, permite visualizar e concluir missões sustentáveis para ganhar pontos.
+![Formulário de edição sobre o catálogo](public/images/gaia-modal-edicao.png)
 
-### Loja de acessórios
+**Visualização no celular**
 
-![Loja de acessórios da GAIA](public/images/loja.jpeg)
-
-Permite utilizar os pontos acumulados para adquirir acessórios e personalizar a GAIA.
-
-### Detalhes de um acessório
-
-![Página de detalhes de um acessório](public/images/detalhes-acessorio.jpeg)
-
-### Responsividade
-
-![Aplicação em dispositivo móvel](public/images/responsividade.jpeg)
-
-Projeto com responsividade
-
+![Modal de administração em tela de celular](public/images/gaia-modal-celular.png)
 
 ## Tecnologias utilizadas
 
@@ -69,6 +51,11 @@ Projeto com responsividade
 - Git e GitHub.
 
 ## Como usar
+
+- **Repositório GitHub:** [GAIA-React](https://github.com/henriquemunizz/GAIA-React)
+- **Aplicação publicada na Vercel:** [Acessar aplicação](https://gaia-react.vercel.app/)
+- **API Java publicada:**  [Acessar API](https://gaia-api-sprint-4.vercel.app/)
+- **Vídeo de apresentação no YouTube:** [Assistir ao vídeo](https://youtu.be/hf6ZWBWJSaQ)
 
 ### Pré-requisitos
 
@@ -113,7 +100,8 @@ npm run build
 | `/solucao/perfil` | Própria conta, progresso e históricos |
 | `/solucao/missoes` | Missões e administração do catálogo |
 | `/solucao/recompensas` | Recompensas e administração do catálogo |
-| `/assistente` | Redirecionamento para missões |
+| `/solucao/chat` | Chat com a Gaia |
+| `/assistente` | Redirecionamento para o chat |
 | `/loja`, `/loja/:id` | Redirecionamento para recompensas |
 | `/membros` | Redirecionamento para Integrantes |
 
@@ -209,13 +197,6 @@ Os testes em `tests/api.test.mjs` verificam os contratos HTTP sem acessar o banc
 - **Turma:** 1TDSPv-2026
 - **GitHub:** [gcosta900](https://github.com/gcosta900)
 - **LinkedIn:** [Gustavo Costa Moreira](https://www.linkedin.com/in/gustavocostamoreira)
-
-## Links da entrega
-
-- **Repositório GitHub:** [GAIA-React](https://github.com/henriquemunizz/GAIA-React)
-- **Aplicação publicada na Vercel:** [Acessar aplicação](COLE_AQUI_O_LINK_DA_VERCEL)
-- **API Java publicada:**  [Acessar API] https://gaia-api-sprint-4.vercel.app/
-- **Vídeo de apresentação no YouTube:** [Assistir ao vídeo](COLE_AQUI_O_LINK_DO_YOUTUBE)
 
 ## Contato
 
