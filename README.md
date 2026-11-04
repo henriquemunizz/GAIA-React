@@ -22,6 +22,12 @@ O **GAIA** é uma assistente virtual para o Challenge SoulUp da FIAP. Na área S
 
 ## Imagens do projeto
 
+**Chat com a Gaia**
+
+Conversa de exemplo: Mariana pergunta qual missão pode fazer e a Gaia explica como ganhar pontos.
+
+![Conversa de Mariana com a Gaia sobre a missão de reciclagem](public/images/gaia-chat.png)
+
 **Perfil e progresso**
 
 ![Perfil do usuário com o progresso na jornada](public/images/gaia-perfil-validado.png)
