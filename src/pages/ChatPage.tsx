@@ -1,189 +1,64 @@
-import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { Link } from 'react-router-dom'
 import { Feedback } from '../components/Feedback'
-import { errorMessage } from '../services/api'
-import { createConversation, getConversations, getMessages, sendMessage } from '../services/chat'
-import type { ChatMessage, Conversation } from '../types/chat'
+import { MessageList } from '../components/MessageList'
+import { useChat } from '../hooks/useChat'
 
 export function ChatPage() {
-  const [conversations, setConversations] = useState<Conversation[]>([])
-  const [selected, setSelected] = useState<number | null>(null)
-  const [messages, setMessages] = useState<ChatMessage[]>([])
-  const [text, setText] = useState('')
-  const [error, setError] = useState('')
-  const [loading, setLoading] = useState(true)
-  const [busy, setBusy] = useState(false)
-  const locked = useRef(false)
-  const version = useRef(0)
-  const end = useRef<HTMLDivElement>(null)
-  const pending = useRef<{ id: string, text: string, conversation: number } | null>(null)
-
-  useEffect(() => {
-    let active = true
-    getConversations().then((data) => {
-      if (active) setConversations(data)
-    }).catch((error) => {
-      if (active) setError(errorMessage(error))
-    }).finally(() => {
-      if (active) setLoading(false)
-    })
-    return () => { active = false; version.current += 1 }
-  }, [])
-
-  useEffect(() => {
-    end.current?.scrollIntoView({ block: 'nearest' })
-  }, [messages, busy])
-
-  async function openConversation(id: number) {
-    if (locked.current) return
-    const current = ++version.current
-    if (selected !== id) {
-      setText('')
-      pending.current = null
-    }
-    setSelected(id)
-    setMessages([])
-    setLoading(true)
-    setError('')
-    try {
-      const data = await getMessages(id)
-      if (current !== version.current) return
-      setMessages(data)
-      if (pending.current && data.some((message) => message.requisicaoId === pending.current?.id)) {
-        pending.current = null
-        setText('')
-      }
-    } catch (error) {
-      if (current === version.current) setError(errorMessage(error))
-    } finally {
-      if (current === version.current) setLoading(false)
-    }
-  }
-
-  async function startConversation() {
-    if (locked.current) return
-    locked.current = true
-    setBusy(true)
-    setError('')
-    ++version.current
-    try {
-      const conversation = await createConversation()
-      setConversations((items) => [conversation, ...items])
-      setSelected(conversation.id)
-      setMessages([])
-      setText('')
-      pending.current = null
-    } catch (error) {
-      setError(errorMessage(error))
-    } finally {
-      locked.current = false
-      setBusy(false)
-    }
-  }
-
-  async function refresh() {
-    if (locked.current) return
-    if (selected !== null) {
-      await openConversation(selected)
-    } else {
-      setLoading(true)
-      setError('')
-      try { setConversations(await getConversations()) }
-      catch (error) { setError(errorMessage(error)) }
-      finally { setLoading(false) }
-    }
-  }
-
-  async function submit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    const content = text.trim()
-    if (locked.current || loading || selected === null || !content || content.length > 2000) return
-    locked.current = true
-    setBusy(true)
-    setError('')
-    if (!pending.current || pending.current.text !== content || pending.current.conversation !== selected) {
-      pending.current = { id: crypto.randomUUID(), text: content, conversation: selected }
-    }
-    try {
-      const data = await sendMessage(selected, content, pending.current.id)
-      setMessages(data)
-      setText('')
-      pending.current = null
-      setConversations((items) => items.map((item) => item.id === selected && item.titulo === 'Nova conversa'
-        ? { ...item, titulo: Array.from(content).slice(0, 60).join('') } : item))
-    } catch (error) {
-      setError(errorMessage(error))
-    } finally {
-      locked.current = false
-      setBusy(false)
-    }
-  }
+  const {
+    conversations, selected, messages, text, setText, error, loading, busy, sending,
+    openConversation, startConversation, refresh, submit,
+  } = useChat()
+  const title = conversations.find((item) => item.id === selected)?.titulo
+  const avatar = '/images/gaia-login.png'
 
   return (
-    <section className="space-y-5" aria-label="Chat com a Gaia">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <h2 className="text-2xl font-bold">Converse com a Gaia</h2>
-          <p className="mt-2 text-sm text-slate-600">Ideias para sua próxima missão e recompensas para acompanhar suas conquistas.</p>
+    <section aria-label="Chat com a Gaia" className="overflow-hidden rounded-3xl border border-gaia-100 bg-white shadow-sm lg:grid lg:grid-cols-[15rem_minmax(0,1fr)]">
+      <aside className="min-w-0 border-b border-gaia-100 bg-gaia-50/60 p-4 lg:border-r lg:border-b-0">
+        <div className="flex items-center justify-between gap-2">
+          <h2 className="font-bold text-gaia-950">Conversas</h2>
+          <button className="btn-secondary px-3 py-2" disabled={busy || loading} onClick={() => void startConversation()}>+ Nova</button>
         </div>
-        <button className="btn-secondary" disabled={busy || loading} onClick={() => void refresh()}>Atualizar conversa</button>
-      </div>
-      <div className="grid items-start gap-6 lg:grid-cols-[16rem_1fr]">
-        <aside className="card space-y-4">
-          <button className="btn-primary w-full" disabled={busy || loading} onClick={() => void startConversation()}>Nova conversa</button>
-          <h3 className="font-bold">Suas conversas</h3>
-          <div className="max-h-72 space-y-2 overflow-y-auto lg:max-h-[28rem]">
-            {conversations.map((conversation) => (
-              <button key={conversation.id} disabled={busy || loading} aria-pressed={selected === conversation.id}
-                onClick={() => void openConversation(conversation.id)}
-                className={`w-full break-words rounded-xl px-4 py-3 text-left text-sm disabled:opacity-50 ${selected === conversation.id ? 'bg-gaia-100 font-semibold text-gaia-900' : 'bg-slate-50 text-slate-600 hover:bg-gaia-50'}`}>
-                {conversation.titulo}
-                <span className="mt-1 block text-xs font-normal">{new Date(conversation.data).toLocaleDateString('pt-BR')}</span>
-              </button>
-            ))}
-            {!loading && conversations.length === 0 && <p className="text-sm text-slate-500">Sua primeira conversa começa aqui.</p>}
-          </div>
-        </aside>
-        <div className="card min-w-0 space-y-5">
-          <Feedback error={error} />
-          {loading && <p role="status" className="text-sm text-slate-500">Carregando conversa...</p>}
-          {selected === null ? (
-            <div className="space-y-4 py-8 text-center">
-              <img src="/images/gaia-login.png" alt="Gaia pronta para conversar" className="mx-auto h-44 w-52 object-contain" />
-              <h3 className="text-xl font-bold text-gaia-900">Vamos dar o próximo passo?</h3>
-              <p className="text-sm leading-6 text-slate-600">Escolha uma conversa ou comece uma nova. Posso ajudar com seu saldo, missões disponíveis e recompensas.</p>
-            </div>
-          ) : (
-            <>
-              <div role="log" aria-label="Mensagens da conversa" aria-live="polite" aria-busy={loading || busy} className="max-h-[28rem] space-y-4 overflow-y-auto pr-2">
-                {!loading && messages.length === 0 && <p className="rounded-xl bg-gaia-50 p-4 text-sm leading-6 text-gaia-900">Olá! Pergunte quais missões você pode realizar ou quais recompensas combinam com seu saldo.</p>}
-                {messages.map((message) => (
-                  <div key={message.id} className={`max-w-[95%] rounded-2xl p-4 sm:max-w-[85%] ${message.autor === 'usuario' ? 'ml-auto bg-gaia-600 text-white' : 'bg-gaia-50 text-slate-800'}`}>
-                    <p className="mb-2 text-xs font-bold">{message.autor === 'usuario' ? 'Você' : 'Gaia'}</p>
-                    <p className="whitespace-pre-wrap break-words text-sm leading-7">{message.texto}</p>
-                    <time dateTime={message.data} className="mt-2 block text-xs opacity-70">{new Date(message.data).toLocaleString('pt-BR')}</time>
-                  </div>
-                ))}
-                {busy && <p role="status" className="text-sm text-gaia-700">A Gaia está preparando sua resposta...</p>}
-                <div ref={end} />
-              </div>
-              <form onSubmit={(event) => void submit(event)} className="space-y-3">
-                <label htmlFor="chat-message" className="text-sm font-semibold">Sua mensagem</label>
-                <textarea id="chat-message" className="field min-h-28 resize-y" value={text} maxLength={2000} disabled={busy || loading}
-                  onChange={(event) => setText(event.target.value)} placeholder="O que posso fazer com meus pontos?" aria-describedby="chat-help" />
-                <div className="flex items-center justify-between gap-3">
-                  <span className="text-xs text-slate-500">{text.length}/2000</span>
-                  <button className="btn-primary" disabled={busy || loading || !text.trim()} type="submit">{busy ? 'Enviando...' : 'Enviar mensagem'}</button>
-                </div>
-              </form>
-            </>
-          )}
-          <p id="chat-help" className="text-xs leading-5 text-slate-500">Suas mensagens e dados da jornada são enviados à IA para responder e ficam salvos na sua conta. Não inclua senhas. Confira os dados no catálogo antes de realizar uma ação.</p>
-          <div className="flex flex-wrap gap-4 border-t border-gaia-100 pt-4 text-sm font-semibold text-gaia-700">
-            <Link to="/solucao/missoes" className="underline">Ver missões</Link>
-            <Link to="/solucao/recompensas" className="underline">Ver recompensas</Link>
-          </div>
+        <div className="mt-3 flex gap-2 overflow-auto lg:max-h-[32rem] lg:flex-col">
+          {conversations.map((conversation) => (
+            <button key={conversation.id} aria-pressed={selected === conversation.id} disabled={busy || loading}
+              onClick={() => void openConversation(conversation.id)}
+              className={`w-44 shrink-0 rounded-xl px-3 py-2 text-left lg:w-full ${selected === conversation.id ? 'bg-gaia-100 font-semibold text-gaia-900' : 'text-slate-600 hover:bg-white'}`}>
+              <span className="block truncate text-sm">{conversation.titulo}</span>
+              <span className="text-xs font-normal">{new Date(conversation.data).toLocaleDateString('pt-BR')}</span>
+            </button>
+          ))}
         </div>
+      </aside>
+      <div className="flex min-w-0 flex-col">
+        <header className="flex items-center gap-3 border-b border-gaia-100 px-4 py-3">
+          <img src={avatar} alt="" className="size-11 rounded-full bg-gaia-100 object-contain" />
+          <div className="min-w-0 flex-1">
+            <h2 className="font-heading text-lg font-bold text-gaia-950">Gaia</h2>
+            <p className="truncate text-xs text-slate-600">{title || 'Assistente da sua jornada'}</p>
+          </div>
+          <button className="text-sm font-semibold text-gaia-700" disabled={busy || loading} onClick={() => void refresh()}>Atualizar</button>
+        </header>
+        <Feedback error={error} />
+        <MessageList messages={messages} sending={sending} loading={loading} avatar={avatar} />
+        <form onSubmit={(event) => void submit(event)} className="border-t border-gaia-100 p-3 sm:px-5">
+          <div className="flex items-end gap-2 rounded-2xl border border-gaia-200 bg-white p-1.5 focus-within:ring-2 focus-within:ring-gaia-400">
+            <label htmlFor="chat-message" className="sr-only">Sua mensagem</label>
+            <textarea id="chat-message" rows={1} className="max-h-32 min-w-0 flex-1 resize-none px-2 py-2 text-sm outline-none [field-sizing:content]" value={sending ? '' : text} maxLength={2000} disabled={busy || loading}
+              onChange={(event) => setText(event.target.value)} onKeyDown={(event) => {
+                if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing) {
+                  event.preventDefault()
+                  event.currentTarget.form?.requestSubmit()
+                }
+              }} placeholder="Escreva para a Gaia…" aria-describedby="chat-help" />
+            <button type="submit" aria-label="Enviar mensagem" className="btn-primary grid size-9 shrink-0 place-items-center p-0" disabled={busy || loading || !text.trim()}>
+              <svg aria-hidden="true" viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m5 12 7-7 7 7M12 5v14" /></svg>
+            </button>
+          </div>
+          <details id="chat-help" className="mt-2 text-xs leading-5 text-slate-600">
+            <summary className="w-fit cursor-pointer">Sobre o chat</summary>
+            <p>Suas mensagens e dados da jornada são enviados à IA e ficam salvos na sua conta. Não inclua senhas. Confira os dados em <Link to="/solucao/missoes" className="underline">Missões</Link> e <Link to="/solucao/recompensas" className="underline">Recompensas</Link>.</p>
+          </details>
+        </form>
       </div>
     </section>
   )
