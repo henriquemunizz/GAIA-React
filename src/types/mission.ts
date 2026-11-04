@@ -1,11 +1,10 @@
 export interface Mission {
-  idMissao: number
-  nmMissao: string
-  dsMissao: string
-  tpDificuldade: number
-  nrPontosRecompensa: number
-  dsImagem: string | null
-  stMissao: string
+  id: number
+  nome: string
+  descricao: string
+  dificuldade: 1 | 2 | 3
+  pontos: number
+  ativo: 0 | 1
 }
 
-export type NewMission = Omit<Mission, 'idMissao'>
+export type NewMission = Omit<Mission, 'id'>
