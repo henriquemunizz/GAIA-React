@@ -1,4 +1,4 @@
-const API_URL = (import.meta.env?.VITE_API_URL || 'http://localhost:8080').replace(/\/+$/, '')
+const API_URL = (import.meta.env?.VITE_API_URL || 'https://api-java-gaia.onrender.com/').replace(/\/+$/, '')
 
 export class ApiError extends Error {
   status: number
